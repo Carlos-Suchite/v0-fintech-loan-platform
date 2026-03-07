@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Gem } from "lucide-react"
+import Image from "next/image"
 import { useLang } from "@/lib/lang-context"
 
 const footerLinks = {
@@ -56,9 +56,13 @@ export function Footer() {
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2.5 font-bold text-xl mb-4">
-              <div className="w-8 h-8 rounded-lg bg-[var(--brand-orange)] flex items-center justify-center">
-                <Gem className="w-4 h-4 text-white" />
-              </div>
+              <Image
+                src="/logo.jpg"
+                alt="Touch of Vintage logo"
+                width={36}
+                height={36}
+                className="rounded-full object-cover"
+              />
               <span className="font-serif tracking-tight">Touch of Vintage</span>
             </Link>
             <p className="text-sm text-white/60 leading-relaxed max-w-xs">{t.tagline}</p>

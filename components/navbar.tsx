@@ -1,8 +1,9 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { useState } from "react"
-import { Menu, X, Gem, Languages } from "lucide-react"
+import { Menu, X, Languages } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLang } from "@/lib/lang-context"
 
@@ -43,9 +44,13 @@ export function Navbar() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 font-bold text-xl text-white shrink-0">
-            <div className="w-8 h-8 rounded-lg bg-[var(--brand-orange)] flex items-center justify-center">
-              <Gem className="w-4 h-4 text-white" />
-            </div>
+            <Image
+              src="/logo.jpg"
+              alt="Touch of Vintage logo"
+              width={36}
+              height={36}
+              className="rounded-full object-cover"
+            />
             <span className="font-serif tracking-tight">Touch of Vintage</span>
           </Link>
 

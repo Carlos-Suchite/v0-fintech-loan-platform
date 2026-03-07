@@ -3,7 +3,8 @@
 import { useState, useRef, useEffect } from "react"
 import { useChat } from "@ai-sdk/react"
 import { DefaultChatTransport } from "ai"
-import { MessageCircle, X, Send, Gem, Loader2 } from "lucide-react"
+import Image from "next/image"
+import { MessageCircle, X, Send, Loader2 } from "lucide-react"
 import { useLang } from "@/lib/lang-context"
 
 function getMessageText(parts: { type: string; text?: string }[] | undefined): string {
@@ -71,9 +72,13 @@ export function ChatWidget() {
             {/* Orange corner brackets on header */}
             <div className="absolute top-0 left-0 w-5 h-5 border-t-2 border-l-2 border-white/40" />
             <div className="absolute top-0 right-0 w-5 h-5 border-t-2 border-r-2 border-white/40" />
-            <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center flex-shrink-0">
-              <Gem className="w-4 h-4 text-white" />
-            </div>
+            <Image
+              src="/logo.jpg"
+              alt="Touch of Vintage"
+              width={32}
+              height={32}
+              className="rounded-full object-cover flex-shrink-0"
+            />
             <div>
               <p className="text-white font-semibold text-sm leading-tight">{ui.title}</p>
               <p className="text-white/70 text-xs">Touch of Vintage</p>
