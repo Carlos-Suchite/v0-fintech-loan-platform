@@ -3,10 +3,10 @@ import { DollarSign, Users, FileText, Calendar, TrendingUp, ArrowRight } from "l
 import { StatusBadge } from "@/components/status-badge"
 
 const stats = [
-  { label: "Total Funded", value: "$1.24M", change: "+12% this month", icon: DollarSign, color: "var(--teal)" },
-  { label: "Active Users", value: "342", change: "+28 this week", icon: Users, color: "var(--navy)" },
-  { label: "Pending Applications", value: "18", change: "Needs review", icon: FileText, color: "#f59e0b" },
-  { label: "Appointments Today", value: "7", change: "3 upcoming", icon: Calendar, color: "#10b981" },
+  { label: "Total Financiado / Total Funded", value: "$1.24M", change: "+12% este mes / this month", icon: DollarSign, color: "var(--brand-orange)" },
+  { label: "Usuarios Activos / Active Users", value: "342", change: "+28 esta semana / this week", icon: Users, color: "var(--brand-orange)" },
+  { label: "Solicitudes Pendientes / Pending", value: "18", change: "Requiere revisión / Needs review", icon: FileText, color: "var(--brand-orange)" },
+  { label: "Citas Hoy / Appointments Today", value: "7", change: "3 próximas / upcoming", icon: Calendar, color: "var(--brand-orange)" },
 ]
 
 const recentApplications = [
@@ -27,23 +27,24 @@ export default function AdminPage() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-8">
-        <h1 className="font-[family-name:var(--font-jakarta)] text-2xl font-bold text-[var(--navy)]">Admin Overview</h1>
-        <p className="text-muted-foreground text-sm mt-1">Welcome back. Here is a summary of all platform activity.</p>
+        <h1 className="font-serif text-2xl font-bold text-foreground">Panel de Administración</h1>
+        <p className="text-[var(--brand-orange)] italic text-sm">Admin Overview</p>
+        <p className="text-muted-foreground text-sm mt-1">Bienvenido. Resumen de toda la actividad de la plataforma. / Welcome back. Summary of all platform activity.</p>
       </div>
 
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
-        {stats.map(({ label, value, change, icon: Icon, color }) => (
+        {stats.map(({ label, value, change, icon: Icon }) => (
           <div key={label} className="bg-card border border-border rounded-2xl p-5">
             <div className="flex items-center justify-between mb-3">
               <p className="text-sm text-muted-foreground">{label}</p>
-              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ backgroundColor: `${color}20` }}>
-                <Icon className="w-4 h-4" style={{ color }} />
+              <div className="w-8 h-8 rounded-lg bg-[var(--brand-orange)]/15 flex items-center justify-center">
+                <Icon className="w-4 h-4 text-[var(--brand-orange)]" />
               </div>
             </div>
-            <p className="font-[family-name:var(--font-jakarta)] text-2xl font-bold text-[var(--navy)]">{value}</p>
+            <p className="font-serif text-2xl font-bold text-foreground">{value}</p>
             <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
-              <TrendingUp className="w-3 h-3 text-green-500" />
+              <TrendingUp className="w-3 h-3 text-[var(--brand-orange)]" />
               {change}
             </p>
           </div>
@@ -54,16 +55,16 @@ export default function AdminPage() {
         {/* Recent Applications */}
         <div className="lg:col-span-2 bg-card border border-border rounded-2xl overflow-hidden">
           <div className="px-6 py-4 border-b border-border flex items-center justify-between">
-            <h2 className="font-semibold text-[var(--navy)]">Recent Applications</h2>
-            <Link href="/admin/applications" className="text-xs text-[var(--teal)] hover:underline flex items-center gap-1">
-              View all <ArrowRight className="w-3 h-3" />
+            <h2 className="font-semibold text-foreground">Solicitudes Recientes / Recent Applications</h2>
+            <Link href="/admin/applications" className="text-xs text-[var(--brand-orange)] hover:underline flex items-center gap-1">
+              Ver todas / View all <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
           <div className="divide-y divide-border">
             {recentApplications.map((app) => (
               <div key={app.id} className="px-6 py-4 flex items-center justify-between gap-4 hover:bg-muted/50 transition-colors">
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-9 h-9 rounded-full bg-[var(--navy)] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
+                  <div className="w-9 h-9 rounded-full bg-[var(--brand-orange)] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">
                     {app.name.split(" ").map(n => n[0]).join("")}
                   </div>
                   <div className="min-w-0">
@@ -86,8 +87,8 @@ export default function AdminPage() {
         {/* Upcoming Appointments */}
         <div className="bg-card border border-border rounded-2xl overflow-hidden">
           <div className="px-6 py-4 border-b border-border flex items-center justify-between">
-            <h2 className="font-semibold text-[var(--navy)]">Upcoming Meetings</h2>
-            <Link href="/admin/appointments" className="text-xs text-[var(--teal)] hover:underline">View all</Link>
+            <h2 className="font-semibold text-foreground">Próximas Citas / Upcoming Meetings</h2>
+            <Link href="/admin/appointments" className="text-xs text-[var(--brand-orange)] hover:underline">Ver todas / View all</Link>
           </div>
           <div className="divide-y divide-border">
             {upcomingAppointments.map((apt) => (
@@ -100,7 +101,7 @@ export default function AdminPage() {
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground">{apt.type}</p>
-                <p className="text-xs text-[var(--teal)] mt-0.5">{apt.officer}</p>
+                <p className="text-xs text-[var(--brand-orange)] mt-0.5">{apt.officer}</p>
               </div>
             ))}
           </div>
