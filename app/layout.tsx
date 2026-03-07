@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
-import { ChatWidget } from '@/components/chat-widget'
 import { LangProvider } from '@/lib/lang-context'
 import './globals.css'
 
@@ -41,7 +40,6 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         <LangProvider>
           {children}
-          <ChatWidget />
         </LangProvider>
         <Analytics />
       </body>
