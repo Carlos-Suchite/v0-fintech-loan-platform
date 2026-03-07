@@ -39,11 +39,16 @@ export function Navbar() {
     <header className="fixed top-0 inset-x-0 z-50 bg-[var(--brand-black)]/95 backdrop-blur border-b border-white/10">
       {/* Orange top line accent */}
       <div className="absolute top-0 left-0 right-0 h-0.5 bg-[var(--brand-orange)]" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 font-bold text-xl text-white shrink-0">
+          {/* Logo — always visible */}
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 font-bold text-xl text-white shrink-0"
+            onClick={() => setOpen(false)}
+          >
             <Image
               src="/logo.jpg"
               alt="Touch of Vintage logo"
@@ -54,77 +59,67 @@ export function Navbar() {
             <span className="font-serif tracking-tight">Touch of Vintage</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-6">
-            {links.map((l) => (
-              <Link
-                key={l.href}
-                href={l.href}
-                className="text-sm text-white/60 hover:text-[var(--brand-orange)] transition-colors"
-              >
-                {l.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop CTA */}
-          <div className="hidden lg:flex items-center gap-2">
-            {/* Language toggle — secondary button */}
-            <button
-              onClick={toggle}
-              aria-label="Cambiar idioma / Toggle language"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-white/20 text-white/60 hover:border-[var(--brand-orange)]/60 hover:text-[var(--brand-orange)] text-xs font-medium transition-colors"
-            >
-              <Languages className="w-3.5 h-3.5" />
-              {lang === "es" ? "EN" : "ES"}
-            </button>
-            <Button variant="ghost" asChild className="text-sm text-white/70 hover:text-[var(--brand-orange)] hover:bg-white/5">
-              <Link href="/login">{t.login}</Link>
-            </Button>
-            <Button asChild className="bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)] text-sm">
-              <Link href="/apply">{t.apply}</Link>
-            </Button>
-          </div>
-
-          {/* Mobile toggle */}
+          {/* Hamburger — always visible on all screen sizes */}
           <button
-            className="lg:hidden p-2 rounded-md text-white/80"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
+            aria-expanded={open}
+            className="p-2 rounded-md text-white/80 hover:text-[var(--brand-orange)] hover:bg-white/5 transition-colors"
           >
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Dropdown menu — full width, all screen sizes */}
       {open && (
-        <div className="lg:hidden bg-[var(--brand-black)] border-t border-white/10 px-4 py-4 flex flex-col gap-3">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-sm text-white/60 hover:text-[var(--brand-orange)] py-1 transition-colors"
-              onClick={() => setOpen(false)}
-            >
-              {l.label}
-            </Link>
-          ))}
-          <div className="flex flex-col gap-2 pt-2 border-t border-white/10">
-            {/* Language toggle mobile */}
-            <button
-              onClick={toggle}
-              className="flex items-center justify-center gap-2 w-full px-3 py-2 rounded-md border border-white/20 text-white/60 hover:border-[var(--brand-orange)]/60 hover:text-[var(--brand-orange)] text-sm font-medium transition-colors"
-            >
-              <Languages className="w-4 h-4" />
-              {lang === "es" ? "Switch to English" : "Cambiar a Español"}
-            </button>
-            <Button variant="outline" asChild className="w-full border-white/20 text-white bg-transparent hover:bg-white/10">
-              <Link href="/login">{t.loginMobile}</Link>
-            </Button>
-            <Button asChild className="w-full bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)]">
-              <Link href="/apply">{t.applyMobile}</Link>
-            </Button>
+        <div className="bg-[var(--brand-black)] border-t border-white/10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col gap-1">
+
+            {/* Nav links */}
+            <nav className="flex flex-col gap-1 mb-3">
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="text-sm text-white/70 hover:text-[var(--brand-orange)] py-2.5 px-3 rounded-lg hover:bg-white/5 transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Divider */}
+            <div className="border-t border-white/10 pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+              {/* Language toggle */}
+              <button
+                onClick={toggle}
+                className="flex items-center justify-center gap-2 px-4 py-2 rounded-md border border-white/20 text-white/60 hover:border-[var(--brand-orange)]/60 hover:text-[var(--brand-orange)] text-sm font-medium transition-colors"
+              >
+                <Languages className="w-4 h-4" />
+                {lang === "es" ? "Switch to English" : "Cambiar a Español"}
+              </button>
+
+              <div className="flex gap-2 sm:ml-auto">
+                <Button
+                  variant="outline"
+                  asChild
+                  className="flex-1 sm:flex-none border-white/20 text-white bg-transparent hover:bg-white/10"
+                  onClick={() => setOpen(false)}
+                >
+                  <Link href="/login">{t.login}</Link>
+                </Button>
+                <Button
+                  asChild
+                  className="flex-1 sm:flex-none bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)]"
+                  onClick={() => setOpen(false)}
+                >
+                  <Link href="/apply">{t.apply}</Link>
+                </Button>
+              </div>
+            </div>
+
           </div>
         </div>
       )}
