@@ -33,7 +33,7 @@ export function TestimonialsSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-sm font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">Opiniones / Reviews</p>
-          <h2 className="font-serif text-4xl font-bold text-[var(--brand-black)] text-balance">
+          <h2 className="font-serif text-4xl font-bold text-foreground text-balance">
             Lo que dicen nuestros clientes
           </h2>
           <p className="text-base text-[var(--brand-orange)] italic mt-1">What our borrowers say</p>
@@ -43,7 +43,7 @@ export function TestimonialsSection() {
           {testimonials.map(({ name, location, quote, rating, amount }) => (
             <div
               key={name}
-              className="bg-card border border-border rounded-2xl p-7 flex flex-col gap-4 hover:border-[var(--brand-orange)]/30 hover:shadow-md transition-all"
+              className="bg-card border border-border rounded-2xl p-7 flex flex-col gap-4 hover:border-[var(--brand-orange)]/50 hover:shadow-lg transition-all"
             >
               <div className="flex gap-0.5">
                 {Array.from({ length: rating }).map((_, i) => (
@@ -56,7 +56,7 @@ export function TestimonialsSection() {
                   <p className="font-semibold text-sm text-foreground">{name}</p>
                   <p className="text-xs text-muted-foreground">{location}</p>
                 </div>
-                <span className="text-xs font-medium bg-[var(--brand-orange-light)] text-[var(--brand-orange-dark)] px-2.5 py-1 rounded-full">
+                <span className="text-xs font-medium bg-[var(--brand-orange)] text-white px-2.5 py-1 rounded-full">
                   {amount}
                 </span>
               </div>

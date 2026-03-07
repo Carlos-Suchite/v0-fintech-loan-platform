@@ -4,8 +4,12 @@ import { Button } from "@/components/ui/button"
 
 export function CTASection() {
   return (
-    <section className="py-24 px-4 bg-[var(--brand-black)]">
-      {/* Orange top accent */}
+    <section className="relative py-24 px-4 bg-[var(--brand-black)] overflow-hidden">
+      {/* Orange corner brackets */}
+      <div className="absolute top-0 left-0 w-20 h-20 border-t-4 border-l-4 border-[var(--brand-orange)]" />
+      <div className="absolute top-0 right-0 w-20 h-20 border-t-4 border-r-4 border-[var(--brand-orange)]" />
+      <div className="absolute bottom-0 left-0 w-20 h-20 border-b-4 border-l-4 border-[var(--brand-orange)]" />
+      <div className="absolute bottom-0 right-0 w-20 h-20 border-b-4 border-r-4 border-[var(--brand-orange)]" />
       <div className="max-w-4xl mx-auto text-center relative">
         <div className="inline-block mb-6 px-4 py-1 rounded-full bg-[var(--brand-orange)]/15 border border-[var(--brand-orange)]/30">
           <span className="text-sm text-[var(--brand-orange)] font-medium">Touch of Vintage</span>

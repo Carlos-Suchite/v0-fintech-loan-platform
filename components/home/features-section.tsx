@@ -39,7 +39,7 @@ export function FeaturesSection() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <p className="text-sm font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">Por Qué Elegirnos / Why Choose Us</p>
-          <h2 className="font-serif text-4xl font-bold text-[var(--brand-black)] text-balance">
+          <h2 className="font-serif text-4xl font-bold text-foreground text-balance">
             Construido para tu bienestar financiero
           </h2>
           <p className="text-base text-[var(--brand-orange)] italic mt-1">Built for your financial wellbeing</p>
@@ -49,12 +49,12 @@ export function FeaturesSection() {
           {features.map(({ icon: Icon, title, description }) => (
             <div
               key={title}
-              className="bg-card border border-border rounded-2xl p-6 hover:shadow-md hover:border-[var(--brand-orange)]/30 transition-all"
+              className="bg-card border border-border rounded-2xl p-6 hover:shadow-md hover:border-[var(--brand-orange)]/50 transition-all"
             >
-              <div className="w-10 h-10 rounded-lg bg-[var(--brand-orange-light)] flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-[var(--brand-orange)]" />
+              <div className="w-10 h-10 rounded-lg bg-[var(--brand-orange)] flex items-center justify-center mb-4">
+                <Icon className="w-5 h-5 text-white" />
               </div>
-              <h3 className="font-semibold text-[var(--brand-black)] mb-2">{title}</h3>
+              <h3 className="font-semibold text-foreground mb-2">{title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
             </div>
           ))}

@@ -33,11 +33,17 @@ const steps = [
 
 export function HowItWorksSection() {
   return (
-    <section className="py-24 px-4 bg-background">
-      <div className="max-w-7xl mx-auto">
+    <section className="relative py-24 px-4 bg-background overflow-hidden">
+      {/* Orange corner brackets */}
+      <div className="absolute top-6 left-6 w-12 h-12 border-t-2 border-l-2 border-[var(--brand-orange)]/50" />
+      <div className="absolute top-6 right-6 w-12 h-12 border-t-2 border-r-2 border-[var(--brand-orange)]/50" />
+      <div className="absolute bottom-6 left-6 w-12 h-12 border-b-2 border-l-2 border-[var(--brand-orange)]/50" />
+      <div className="absolute bottom-6 right-6 w-12 h-12 border-b-2 border-r-2 border-[var(--brand-orange)]/50" />
+
+      <div className="max-w-7xl mx-auto relative">
         <div className="text-center mb-16">
           <p className="text-sm font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">Proceso / Process</p>
-          <h2 className="font-serif text-4xl font-bold text-[var(--brand-black)] text-balance">
+          <h2 className="font-serif text-4xl font-bold text-foreground text-balance">
             Cómo Funciona
           </h2>
           <p className="text-base text-[var(--brand-orange)] italic mt-1">How It Works</p>
@@ -49,14 +55,14 @@ export function HowItWorksSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map(({ icon: Icon, step, title, subtitle, description }) => (
             <div key={step} className="relative">
-              <div className="bg-card border border-border rounded-2xl p-6 h-full hover:shadow-lg hover:border-[var(--brand-orange)]/30 transition-all">
+              <div className="bg-card border border-border rounded-2xl p-6 h-full hover:shadow-lg hover:border-[var(--brand-orange)]/50 transition-all">
                 <div className="flex items-start justify-between mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-[var(--brand-orange-light)] flex items-center justify-center">
-                    <Icon className="w-6 h-6 text-[var(--brand-orange)]" />
+                  <div className="w-12 h-12 rounded-xl bg-[var(--brand-orange)] flex items-center justify-center">
+                    <Icon className="w-6 h-6 text-white" />
                   </div>
-                  <span className="text-4xl font-bold text-border font-serif">{step}</span>
+                  <span className="text-4xl font-bold text-[var(--brand-orange)]/20 font-serif">{step}</span>
                 </div>
-                <h3 className="font-semibold text-[var(--brand-black)] mb-0.5">{title}</h3>
+                <h3 className="font-semibold text-foreground mb-0.5">{title}</h3>
                 <p className="text-xs text-[var(--brand-orange)] italic mb-3">{subtitle}</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">{description}</p>
               </div>
