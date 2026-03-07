@@ -4,19 +4,19 @@ type Status = "pending" | "under_review" | "approved" | "rejected"
 
 const statusConfig: Record<Status, { label: string; className: string }> = {
   pending: {
-    label: "Pending",
-    className: "bg-yellow-100 text-yellow-800",
+    label: "Pendiente / Pending",
+    className: "bg-amber-100 text-amber-800",
   },
   under_review: {
-    label: "Under Review",
-    className: "bg-blue-100 text-blue-800",
+    label: "En Revisión / Under Review",
+    className: "bg-[var(--brand-orange-light)] text-[var(--brand-orange-dark)]",
   },
   approved: {
-    label: "Approved",
+    label: "Aprobado / Approved",
     className: "bg-green-100 text-green-800",
   },
   rejected: {
-    label: "Rejected",
+    label: "Rechazado / Rejected",
     className: "bg-red-100 text-red-800",
   },
 }

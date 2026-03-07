@@ -4,22 +4,30 @@ import { Button } from "@/components/ui/button"
 
 export function CTASection() {
   return (
-    <section className="py-24 px-4 bg-[var(--navy)]">
-      <div className="max-w-4xl mx-auto text-center">
-        <h2 className="font-[family-name:var(--font-jakarta)] text-4xl sm:text-5xl font-bold text-white mb-6 text-balance">
-          Ready to get started?
+    <section className="py-24 px-4 bg-[var(--brand-black)]">
+      {/* Orange top accent */}
+      <div className="max-w-4xl mx-auto text-center relative">
+        <div className="inline-block mb-6 px-4 py-1 rounded-full bg-[var(--brand-orange)]/15 border border-[var(--brand-orange)]/30">
+          <span className="text-sm text-[var(--brand-orange)] font-medium">Touch of Vintage</span>
+        </div>
+        <h2 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-3 text-balance">
+          ¿Listo para comenzar?
         </h2>
-        <p className="text-white/60 text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+        <p className="text-lg text-[var(--brand-orange)] italic mb-3">Ready to get started?</p>
+        <p className="text-white/60 text-base leading-relaxed mb-4 max-w-xl mx-auto">
+          Solicita un préstamo personal hoy o agenda una consulta gratuita con uno de nuestros asesores financieros.
+        </p>
+        <p className="text-white/40 text-sm leading-relaxed mb-10 max-w-xl mx-auto">
           Apply for a personal loan today or schedule a free consultation with one of our financial advisors.
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <Button
             asChild
             size="lg"
-            className="bg-[var(--teal)] hover:bg-[var(--teal)]/90 text-white font-semibold px-8"
+            className="bg-[var(--brand-orange)] hover:bg-[var(--brand-orange-dark)] text-white font-semibold px-8"
           >
             <Link href="/apply">
-              Apply for a Loan <ArrowRight className="ml-2 w-4 h-4" />
+              Solicitar Préstamo / Apply for a Loan <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
           </Button>
           <Button
@@ -30,7 +38,7 @@ export function CTASection() {
           >
             <Link href="/book-meeting">
               <Calendar className="mr-2 w-4 h-4" />
-              Book a Consultation
+              Agendar Consulta / Book a Consultation
             </Link>
           </Button>
         </div>

@@ -1,14 +1,14 @@
 import type { Metadata } from 'next'
-import { Inter, Plus_Jakarta_Sans } from 'next/font/google'
+import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
-const plusJakarta = Plus_Jakarta_Sans({ subsets: ['latin'], variable: '--font-jakarta' })
+const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: 'SwiftLend — Fast & Trusted Personal Loans',
-  description: 'Apply for a personal loan online in minutes. Transparent rates, quick decisions, and dedicated support for your financial needs.',
+  title: 'Touch of Vintage — Préstamos Personales / Personal Loans',
+  description: 'Solicita tu préstamo personal en minutos. Tasas transparentes, decisiones rápidas y atención dedicada. Apply for a personal loan in minutes — fast, transparent, and trusted.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${plusJakarta.variable} font-sans antialiased`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
         {children}
         <Analytics />
       </body>
