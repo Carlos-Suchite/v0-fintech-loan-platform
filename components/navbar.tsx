@@ -46,17 +46,16 @@ export function Navbar() {
           {/* Logo — always visible */}
           <Link
             href="/"
-            className="flex items-center gap-2.5 font-bold text-xl text-white shrink-0"
+            className="flex items-center shrink-0"
             onClick={() => setOpen(false)}
           >
             <Image
               src="/logo.jpg"
-              alt="Touch of Vintage logo"
-              width={36}
-              height={36}
-              className="rounded-full object-cover"
+              alt="Touch of Vintage"
+              width={160}
+              height={60}
+              className="object-contain h-10 w-auto"
             />
-            <span className="font-serif tracking-tight">Touch of Vintage</span>
           </Link>
 
           {/* Hamburger — always visible on all screen sizes */}

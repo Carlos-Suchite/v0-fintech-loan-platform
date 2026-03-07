@@ -55,15 +55,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <Link href="/" className="flex items-center gap-2.5 font-bold text-xl mb-4">
+            <Link href="/" className="inline-flex mb-4">
               <Image
                 src="/logo.jpg"
-                alt="Touch of Vintage logo"
-                width={36}
-                height={36}
-                className="rounded-full object-cover"
+                alt="Touch of Vintage"
+                width={160}
+                height={60}
+                className="object-contain h-10 w-auto"
               />
-              <span className="font-serif tracking-tight">Touch of Vintage</span>
             </Link>
             <p className="text-sm text-white/60 leading-relaxed max-w-xs">{t.tagline}</p>
           </div>
