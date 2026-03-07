@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react"
 import { useChat } from "@ai-sdk/react"
 import { DefaultChatTransport } from "ai"
 import { MessageCircle, X, Send, Gem, Loader2 } from "lucide-react"
+import { useLang } from "@/lib/lang-context"
 
 function getMessageText(parts: { type: string; text?: string }[] | undefined): string {
   if (!parts) return ""
@@ -13,9 +14,16 @@ function getMessageText(parts: { type: string; text?: string }[] | undefined): s
     .join("")
 }
 
+const uiCopy = {
+  es: { title: "Asistente Touch of Vintage", greeting: "¡Hola! ¿En qué puedo ayudarte hoy?", placeholder: "Escribe tu pregunta...", typing: "Escribiendo...", open: "Abrir asistente", close: "Cerrar chat" },
+  en: { title: "Touch of Vintage Assistant", greeting: "Hi! How can I help you today?", placeholder: "Type your question...", typing: "Typing...", open: "Open assistant", close: "Close chat" },
+}
+
 export function ChatWidget() {
   const [open, setOpen] = useState(false)
   const bottomRef = useRef<HTMLDivElement>(null)
+  const { lang } = useLang()
+  const ui = uiCopy[lang]
 
   const { messages, sendMessage, status, input, setInput } = useChat({
     transport: new DefaultChatTransport({ api: "/api/chat" }),
@@ -47,7 +55,7 @@ export function ChatWidget() {
       {/* Floating button */}
       <button
         onClick={() => setOpen((v) => !v)}
-        aria-label={open ? "Cerrar chat" : "Abrir asistente"}
+        aria-label={open ? ui.close : ui.open}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[var(--brand-orange)] text-white shadow-lg hover:bg-[var(--brand-orange-dark)] transition-all flex items-center justify-center"
       >
         {open ? <X className="w-6 h-6" /> : <MessageCircle className="w-6 h-6" />}
@@ -67,8 +75,8 @@ export function ChatWidget() {
               <Gem className="w-4 h-4 text-white" />
             </div>
             <div>
-              <p className="text-white font-semibold text-sm leading-tight">Asistente Touch of Vintage</p>
-              <p className="text-white/70 text-xs">Virtual Assistant</p>
+              <p className="text-white font-semibold text-sm leading-tight">{ui.title}</p>
+              <p className="text-white/70 text-xs">Touch of Vintage</p>
             </div>
           </div>
 
@@ -76,8 +84,7 @@ export function ChatWidget() {
           <div className="flex-1 overflow-y-auto p-4 flex flex-col gap-3 min-h-0" style={{ maxHeight: "340px" }}>
             {messages.length === 0 && (
               <div className="text-center mt-6">
-                <p className="text-white/50 text-sm">Hola! ¿En qué puedo ayudarte hoy?</p>
-                <p className="text-white/30 text-xs mt-1">Hi! How can I help you today?</p>
+                <p className="text-white/50 text-sm">{ui.greeting}</p>
               </div>
             )}
             {messages.map((msg) => {
@@ -102,7 +109,7 @@ export function ChatWidget() {
               <div className="flex justify-start">
                 <div className="bg-white/10 rounded-2xl rounded-bl-sm px-3 py-2 flex items-center gap-1.5">
                   <Loader2 className="w-3 h-3 text-[var(--brand-orange)] animate-spin" />
-                  <span className="text-white/50 text-xs">Escribiendo...</span>
+                  <span className="text-white/50 text-xs">{ui.typing}</span>
                 </div>
               </div>
             )}
@@ -115,7 +122,7 @@ export function ChatWidget() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKey}
-              placeholder="Escribe tu pregunta... / Type your question..."
+              placeholder={ui.placeholder}
               rows={1}
               className="flex-1 bg-white/10 text-white placeholder:text-white/30 rounded-xl px-3 py-2 text-sm resize-none outline-none focus:ring-1 focus:ring-[var(--brand-orange)] leading-relaxed"
               style={{ maxHeight: "80px" }}

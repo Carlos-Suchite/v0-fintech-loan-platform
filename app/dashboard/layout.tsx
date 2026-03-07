@@ -27,7 +27,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Mobile top bar */}
-        <div className="lg:hidden flex items-center justify-between bg-[var(--navy)] px-4 py-3">
+        <div className="lg:hidden flex items-center justify-between bg-[var(--brand-black)] px-4 py-3">
           <button
             onClick={() => setMobileOpen(true)}
             className="text-white p-1"
@@ -35,7 +35,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           >
             <Menu className="w-5 h-5" />
           </button>
-          <span className="text-white font-semibold font-[family-name:var(--font-jakarta)]">SwiftLend</span>
+          <span className="text-white font-semibold font-serif">Touch of Vintage</span>
           <div className="w-7" />
         </div>
 

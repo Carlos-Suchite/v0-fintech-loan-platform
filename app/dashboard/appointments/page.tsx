@@ -19,10 +19,10 @@ export default function AppointmentsPage() {
     <div className="max-w-3xl mx-auto">
       <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
         <div>
-          <h1 className="font-[family-name:var(--font-jakarta)] text-2xl font-bold text-[var(--navy)]">Appointments</h1>
+          <h1 className="font-serif text-2xl font-bold text-foreground">Appointments</h1>
           <p className="text-muted-foreground text-sm mt-1">Manage your scheduled consultations with our loan officers.</p>
         </div>
-        <Button asChild className="bg-[var(--navy)] text-white hover:bg-[var(--navy-light)]">
+        <Button asChild className="bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)]">
           <Link href="/book-meeting">
             Book New Appointment <ArrowRight className="ml-2 w-4 h-4" />
           </Link>
@@ -38,21 +38,21 @@ export default function AppointmentsPage() {
                   <p className="font-semibold text-foreground">{apt.type}</p>
                   <p className="text-sm text-muted-foreground">with {apt.officer}</p>
                 </div>
-                <span className="text-xs font-medium bg-[var(--teal-light)] text-[var(--teal)] px-2.5 py-1 rounded-full capitalize">
+                <span className="text-xs font-medium bg-[var(--brand-orange)]/15 text-[var(--brand-orange)] px-2.5 py-1 rounded-full capitalize">
                   {apt.status}
                 </span>
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-border">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Calendar className="w-4 h-4 text-[var(--teal)]" />
+                  <Calendar className="w-4 h-4 text-[var(--brand-orange)]" />
                   {apt.date}
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Clock className="w-4 h-4 text-[var(--teal)]" />
+                  <Clock className="w-4 h-4 text-[var(--brand-orange)]" />
                   {apt.time}
                 </div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <Video className="w-4 h-4 text-[var(--teal)]" />
+                  <Video className="w-4 h-4 text-[var(--brand-orange)]" />
                   {apt.mode}
                 </div>
               </div>
@@ -72,7 +72,7 @@ export default function AppointmentsPage() {
           <p className="text-sm text-muted-foreground mb-5">
             Book a free consultation with one of our loan officers.
           </p>
-          <Button asChild className="bg-[var(--navy)] text-white hover:bg-[var(--navy-light)]">
+          <Button asChild className="bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)]">
             <Link href="/book-meeting">Book a Consultation</Link>
           </Button>
         </div>

@@ -23,11 +23,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       )}
 
       <div className="flex-1 flex flex-col overflow-hidden">
-        <div className="lg:hidden flex items-center justify-between px-4 py-3" style={{ backgroundColor: "#0f172a" }}>
+        <div className="lg:hidden flex items-center justify-between bg-[var(--brand-black)] px-4 py-3">
           <button onClick={() => setMobileOpen(true)} className="text-white p-1">
             <Menu className="w-5 h-5" />
           </button>
-          <span className="text-white font-semibold font-[family-name:var(--font-jakarta)]">SwiftLend Admin</span>
+          <span className="text-white font-semibold font-serif">Touch of Vintage Admin</span>
           <div className="w-7" />
         </div>
         <main className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8">

@@ -41,10 +41,10 @@ export default function LoansPage() {
     <div className="max-w-4xl mx-auto">
       <div className="flex items-center justify-between mb-8 flex-wrap gap-4">
         <div>
-          <h1 className="font-[family-name:var(--font-jakarta)] text-2xl font-bold text-[var(--navy)]">My Loans</h1>
+          <h1 className="font-serif text-2xl font-bold text-foreground">My Loans</h1>
           <p className="text-muted-foreground text-sm mt-1">All your loan applications in one place.</p>
         </div>
-        <Button asChild className="bg-[var(--navy)] text-white hover:bg-[var(--navy-light)]">
+        <Button asChild className="bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)]">
           <Link href="/apply">
             Apply for a New Loan <ArrowRight className="ml-2 w-4 h-4" />
           </Link>

@@ -48,7 +48,7 @@ export default function DashboardPage() {
       {/* Header */}
       <div className="flex items-start justify-between mb-8 flex-wrap gap-4">
         <div>
-          <h1 className="font-serif text-2xl font-bold text-[var(--brand-black)]">
+          <h1 className="font-serif text-2xl font-bold text-foreground">
             Buenos días, María
           </h1>
           <p className="text-muted-foreground text-sm mt-1">
@@ -72,7 +72,7 @@ export default function DashboardPage() {
                 <Icon className="w-4 h-4 text-[var(--brand-orange)]" />
               </div>
             </div>
-            <p className="font-serif text-2xl font-bold text-[var(--brand-black)]">{value}</p>
+            <p className="font-serif text-2xl font-bold text-foreground">{value}</p>
             <p className="text-xs text-muted-foreground mt-1">{sub}</p>
           </div>
         ))}
@@ -82,7 +82,7 @@ export default function DashboardPage() {
         {/* Loan Applications */}
         <div className="lg:col-span-2 bg-card border border-border rounded-2xl p-6">
           <div className="flex items-center justify-between mb-5">
-            <h2 className="font-semibold text-[var(--brand-black)]">Solicitudes / Loan Applications</h2>
+            <h2 className="font-semibold text-foreground">Solicitudes / Loan Applications</h2>
             <Link href="/dashboard/loans" className="text-xs text-[var(--brand-orange)] hover:underline">Ver todas / View all</Link>
           </div>
           <div className="flex flex-col gap-4">
@@ -120,7 +120,7 @@ export default function DashboardPage() {
 
         {/* Recent Activity */}
         <div className="bg-card border border-border rounded-2xl p-6">
-          <h2 className="font-semibold text-[var(--brand-black)] mb-5">Actividad Reciente / Recent Activity</h2>
+          <h2 className="font-semibold text-foreground mb-5">Actividad Reciente / Recent Activity</h2>
           <div className="flex flex-col gap-4">
             {recentActivity.map(({ action, time, icon: Icon }) => (
               <div key={action} className="flex items-start gap-3">

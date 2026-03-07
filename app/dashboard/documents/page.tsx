@@ -29,7 +29,7 @@ export default function DocumentsPage() {
   return (
     <div className="max-w-4xl mx-auto">
       <div className="mb-8">
-        <h1 className="font-[family-name:var(--font-jakarta)] text-2xl font-bold text-[var(--navy)]">Documents</h1>
+        <h1 className="font-serif text-2xl font-bold text-foreground">Documents</h1>
         <p className="text-muted-foreground text-sm mt-1">
           Upload and manage documents required for your loan application.
         </p>
@@ -38,14 +38,14 @@ export default function DocumentsPage() {
       {/* Upload zone */}
       <div
         className={`border-2 border-dashed rounded-2xl p-10 flex flex-col items-center gap-4 transition-colors mb-8 ${
-          dragOver ? "border-[var(--teal)] bg-[var(--teal-light)]" : "border-border"
+          dragOver ? "border-[var(--brand-orange)] bg-[var(--brand-orange)]/10" : "border-border"
         }`}
         onDragOver={(e) => { e.preventDefault(); setDragOver(true) }}
         onDragLeave={() => setDragOver(false)}
         onDrop={() => { setDragOver(false); handleUpload() }}
       >
-        <div className="w-14 h-14 rounded-full bg-[var(--teal-light)] flex items-center justify-center">
-          <Upload className="w-6 h-6 text-[var(--teal)]" />
+        <div className="w-14 h-14 rounded-full bg-[var(--brand-orange)]/15 flex items-center justify-center">
+          <Upload className="w-6 h-6 text-[var(--brand-orange)]" />
         </div>
         <div className="text-center">
           <p className="font-semibold text-foreground mb-1">Drag and drop files here</p>
@@ -57,7 +57,7 @@ export default function DocumentsPage() {
       {/* Document list */}
       <div className="bg-card border border-border rounded-2xl overflow-hidden">
         <div className="px-6 py-4 border-b border-border">
-          <h2 className="font-semibold text-[var(--navy)]">Required Documents</h2>
+          <h2 className="font-semibold text-foreground">Required Documents</h2>
         </div>
         <div className="divide-y divide-border">
           {docs.map((doc) => (
