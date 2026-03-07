@@ -8,18 +8,18 @@ const content = {
     tag: "Opiniones",
     heading: "Lo que dicen nuestros clientes",
     testimonials: [
-      { name: "María S.", location: "Miami, FL", quote: "Me aprobaron en 3 horas y tuve los fondos en mi cuenta a la mañana siguiente. El proceso fue increíblemente sencillo.", rating: 5, amount: "$8,000" },
-      { name: "James T.", location: "Houston, TX", quote: "Touch of Vintage me ayudó a consolidar mis deudas a una tasa mucho más baja. El equipo fue profesional en todo momento.", rating: 5, amount: "$15,000" },
-      { name: "Priya M.", location: "Los Angeles, CA", quote: "Sin cargos ocultos, comunicación clara y un asesor realmente útil. No podría pedir una mejor experiencia.", rating: 5, amount: "$5,000" },
+      { name: "María S.", location: "Miami, FL", quote: "Me aprobaron en 3 horas y tuve los fondos en mi cuenta a la mañana siguiente. El proceso fue increíblemente sencillo.", rating: 5, amount: "$2,500" },
+      { name: "James T.", location: "Houston, TX", quote: "Touch of Vintage me ayudó a consolidar mis deudas a una tasa mucho más baja. El equipo fue profesional en todo momento.", rating: 5, amount: "$4,000" },
+      { name: "Priya M.", location: "Los Angeles, CA", quote: "Sin cargos ocultos, comunicación clara y un asesor realmente útil. No podría pedir una mejor experiencia.", rating: 5, amount: "$1,500" },
     ],
   },
   en: {
     tag: "Reviews",
     heading: "What our borrowers say",
     testimonials: [
-      { name: "María S.", location: "Miami, FL", quote: "I was approved within 3 hours and had funds in my account the next morning. The process was incredibly simple.", rating: 5, amount: "$8,000" },
-      { name: "James T.", location: "Houston, TX", quote: "Touch of Vintage helped me consolidate my debt at a much lower rate. The team was professional every step of the way.", rating: 5, amount: "$15,000" },
-      { name: "Priya M.", location: "Los Angeles, CA", quote: "No hidden fees, clear communication, and a genuinely helpful loan officer. Couldn't ask for a better experience.", rating: 5, amount: "$5,000" },
+      { name: "María S.", location: "Miami, FL", quote: "I was approved within 3 hours and had funds in my account the next morning. The process was incredibly simple.", rating: 5, amount: "$2,500" },
+      { name: "James T.", location: "Houston, TX", quote: "Touch of Vintage helped me consolidate my debt at a much lower rate. The team was professional every step of the way.", rating: 5, amount: "$4,000" },
+      { name: "Priya M.", location: "Los Angeles, CA", quote: "No hidden fees, clear communication, and a genuinely helpful loan officer. Couldn't ask for a better experience.", rating: 5, amount: "$1,500" },
     ],
   },
 }

@@ -63,7 +63,7 @@ export default function AboutPage() {
               Construimos Touch of Vintage para ser diferente. Nuestro modelo de suscripción propietario va más allá del puntaje crediticio para obtener una imagen más completa de quién eres financieramente. Combinado con un proceso de solicitud digital ágil, podemos entregar decisiones rápidas con tasas competitivas.
             </p>
             <p>
-              Desde nuestra fundación, hemos financiado más de $250M en préstamos personales a más de 10,000 prestatarios en los Estados Unidos. Tenemos licencia en 45 estados y estamos comprometidos con el préstamo responsable y orientado a la comunidad.
+              Desde nuestra fundación, hemos financiado más de $5M en préstamos personales a más de 500 prestatarios en los Estados Unidos. Tenemos licencia en 45 estados y estamos comprometidos con el préstamo responsable y orientado a la comunidad.
             </p>
           </div>
 

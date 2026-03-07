@@ -26,8 +26,8 @@ export default function LoginPage() {
 
         <div className="grid grid-cols-3 gap-4">
           {[
-            { value: "$250M+", label: "Fondos / Funded" },
-            { value: "10K+", label: "Clientes / Borrowers" },
+            { value: "$5M+", label: "Fondos / Funded" },
+            { value: "500+", label: "Clientes / Borrowers" },
             { value: "4.9★", label: "Calificación / Rating" },
           ].map(({ value, label }) => (
             <div key={label} className="bg-white/10 rounded-xl p-4 text-center">

@@ -252,8 +252,8 @@ export default function ApplyPage() {
                   <p className="text-xs font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">Pago Estimado / Estimated Payment</p>
                   <div className="grid grid-cols-3 gap-4">
                     {[
-                      { label: "Pago Mensual / Monthly", value: "~$231" },
-                      { label: "Interés Total / Total Interest", value: "~$544" },
+                      { label: "Pago Mensual / Monthly", value: "~$72" },
+                      { label: "Interés Total / Total Interest", value: "~$170" },
                       { label: "APR inicial / Starting APR", value: "12.5%" },
                     ].map(({ label, value }) => (
                       <div key={label}>
@@ -286,7 +286,7 @@ export default function ApplyPage() {
                       <Upload className="w-8 h-8 text-muted-foreground" />
                       <div>
                         <p className="font-medium text-sm text-foreground">{doc}</p>
-                        <p className="text-xs text-muted-foreground mt-0.5">PDF, JPG, o PNG — máx 10MB / max 10MB</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">PDF, JPG, o PNG — m��x 10MB / max 10MB</p>
                       </div>
                       <Button size="sm" variant="outline">Elegir archivo / Choose File</Button>
                     </div>
@@ -322,8 +322,8 @@ export default function ApplyPage() {
                 <div className="space-y-4">
                   {[
                     { label: "Información Personal / Personal Info", items: ["María García", "tu@correo.com", "+1 (555) 000-0000"] },
-                    { label: "Empleo / Employment", items: ["Tiempo Completo / Full-Time", "Empresa ABC", "$5,000/mes / month"] },
-                    { label: "Préstamo / Loan Details", items: ["$5,000", "24 meses / months", "Consolidación / Debt Consolidation"] },
+                    { label: "Empleo / Employment", items: ["Tiempo Completo / Full-Time", "Empresa ABC", "$2,500/mes / month"] },
+                    { label: "Préstamo / Loan Details", items: ["$1,500", "24 meses / months", "Consolidación / Debt Consolidation"] },
                     { label: "Documentos / Documents", items: uploadedFiles.length > 0 ? uploadedFiles : ["Sin documentos / No documents uploaded"] },
                   ].map(({ label, items }) => (
                     <div key={label} className="bg-muted border border-border rounded-xl p-4">

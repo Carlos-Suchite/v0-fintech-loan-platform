@@ -6,11 +6,11 @@ import { StatusBadge } from "@/components/status-badge"
 const loans = [
   {
     id: "LN-2024-001",
-    amount: "$5,000",
+    amount: "$1,500",
     purpose: "Consolidación de Deudas / Debt Consolidation",
     applied: "Feb 28, 2026",
     status: "under_review" as const,
-    monthly: "$231",
+    monthly: "$72",
     term: "24 meses / months",
   },
 ]
@@ -24,13 +24,13 @@ const recentActivity = [
 const statCards = [
   {
     label: "Total Solicitado / Total Applied",
-    value: "$5,000",
+    value: "$1,500",
     icon: DollarSign,
     sub: "1 solicitud activa / 1 active application",
   },
   {
     label: "Pago Mensual / Monthly Payment",
-    value: "$231",
+    value: "$72",
     icon: Calendar,
     sub: "Estimado si aprobado / Estimated if approved",
   },

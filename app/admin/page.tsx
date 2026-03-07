@@ -3,18 +3,18 @@ import { DollarSign, Users, FileText, Calendar, TrendingUp, ArrowRight } from "l
 import { StatusBadge } from "@/components/status-badge"
 
 const stats = [
-  { label: "Total Financiado / Total Funded", value: "$1.24M", change: "+12% este mes / this month", icon: DollarSign, color: "var(--brand-orange)" },
+  { label: "Total Financiado / Total Funded", value: "$82K", change: "+12% este mes / this month", icon: DollarSign, color: "var(--brand-orange)" },
   { label: "Usuarios Activos / Active Users", value: "342", change: "+28 esta semana / this week", icon: Users, color: "var(--brand-orange)" },
   { label: "Solicitudes Pendientes / Pending", value: "18", change: "Requiere revisión / Needs review", icon: FileText, color: "var(--brand-orange)" },
   { label: "Citas Hoy / Appointments Today", value: "7", change: "3 próximas / upcoming", icon: Calendar, color: "var(--brand-orange)" },
 ]
 
 const recentApplications = [
-  { id: "LN-2026-045", name: "James Torres", amount: "$8,000", purpose: "Home Improvement", date: "Mar 7, 2026", status: "pending" as const },
-  { id: "LN-2026-044", name: "Priya Menon", amount: "$3,500", purpose: "Medical", date: "Mar 7, 2026", status: "under_review" as const },
-  { id: "LN-2026-043", name: "Marcus Lee", amount: "$12,000", purpose: "Debt Consolidation", date: "Mar 6, 2026", status: "approved" as const },
-  { id: "LN-2026-042", name: "Sophia Kim", amount: "$5,000", purpose: "Education", date: "Mar 6, 2026", status: "under_review" as const },
-  { id: "LN-2026-041", name: "Daniel Cruz", amount: "$2,500", purpose: "Vehicle", date: "Mar 5, 2026", status: "rejected" as const },
+  { id: "LN-2026-045", name: "James Torres", amount: "$2,500", purpose: "Home Improvement", date: "Mar 7, 2026", status: "pending" as const },
+  { id: "LN-2026-044", name: "Priya Menon", amount: "$1,200", purpose: "Medical", date: "Mar 7, 2026", status: "under_review" as const },
+  { id: "LN-2026-043", name: "Marcus Lee", amount: "$3,500", purpose: "Debt Consolidation", date: "Mar 6, 2026", status: "approved" as const },
+  { id: "LN-2026-042", name: "Sophia Kim", amount: "$1,500", purpose: "Education", date: "Mar 6, 2026", status: "under_review" as const },
+  { id: "LN-2026-041", name: "Daniel Cruz", amount: "$800", purpose: "Vehicle", date: "Mar 5, 2026", status: "rejected" as const },
 ]
 
 const upcomingAppointments = [

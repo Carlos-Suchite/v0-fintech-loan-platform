@@ -16,7 +16,7 @@ const content = {
     trust: ["Seguridad Bancaria", "Pre-aprobación Rápida", "Fondos en 24h"],
     cardTitle: "Resumen del Préstamo",
     cardRows: ["Monto", "Plazo", "Pago Mensual", "APR"],
-    cardVals: ["$5,000", "24 meses", "$231", "12.5%"],
+    cardVals: ["$1,500", "24 meses", "$72", "12.5%"],
     approval: "Probabilidad de aprobación: Alta",
   },
   en: {
@@ -29,7 +29,7 @@ const content = {
     trust: ["Bank-Level Security", "Instant Pre-Approval", "Funds in 24 Hours"],
     cardTitle: "Loan Summary",
     cardRows: ["Amount", "Term", "Monthly Payment", "APR"],
-    cardVals: ["$5,000", "24 months", "$231", "12.5%"],
+    cardVals: ["$1,500", "24 months", "$72", "12.5%"],
     approval: "Approval likelihood: High",
   },
 }

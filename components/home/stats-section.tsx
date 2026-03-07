@@ -4,14 +4,14 @@ import { useLang } from "@/lib/lang-context"
 
 const stats = {
   es: [
-    { value: "$250M+", label: "Préstamos Otorgados" },
-    { value: "10,000+", label: "Clientes Felices" },
+    { value: "$5M+", label: "Préstamos Otorgados" },
+    { value: "500+", label: "Clientes Felices" },
     { value: "4.9 / 5", label: "Calificación Promedio" },
     { value: "< 24h", label: "Tiempo de Fondeo" },
   ],
   en: [
-    { value: "$250M+", label: "Loans Funded" },
-    { value: "10,000+", label: "Happy Borrowers" },
+    { value: "$5M+", label: "Loans Funded" },
+    { value: "500+", label: "Happy Borrowers" },
     { value: "4.9 / 5", label: "Average Rating" },
     { value: "< 24h", label: "Funding Time" },
   ],

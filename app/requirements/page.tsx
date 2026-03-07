@@ -9,7 +9,7 @@ const eligible = [
   "Ciudadano estadounidense o residente permanente / US citizen or permanent resident",
   "Al menos 18 años de edad / At least 18 years of age",
   "Identificación oficial con foto válida / Valid government-issued photo ID",
-  "Ingresos mensuales mínimos de $1,500 / Minimum monthly income of $1,500",
+  "Ingresos mensuales mínimos de $800 / Minimum monthly income of $800",
   "Cuenta de cheques activa en EE.UU. / Active checking account in the US",
   "Sin quiebras declaradas en los últimos 24 meses / No bankruptcies filed in the past 24 months",
 ]
@@ -45,9 +45,9 @@ const documents = [
 ]
 
 const loanRanges = [
-  { range: "$500 – $2,500", term: "6–12 meses / months", apr: "Desde / From 9.9%" },
-  { range: "$2,500 – $10,000", term: "12–36 meses / months", apr: "Desde / From 8.9%" },
-  { range: "$10,000 – $25,000", term: "24–60 meses / months", apr: "Desde / From 7.9%" },
+  { range: "$200 – $800", term: "6–12 meses / months", apr: "Desde / From 9.9%" },
+  { range: "$800 – $3,000", term: "12–36 meses / months", apr: "Desde / From 8.9%" },
+  { range: "$3,000 – $8,000", term: "24–60 meses / months", apr: "Desde / From 7.9%" },
 ]
 
 export default function RequirementsPage() {

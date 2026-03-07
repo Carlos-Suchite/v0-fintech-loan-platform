@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 const faqs = [
   {
     q: "¿Cuánto puedo pedir prestado? / How much can I borrow?",
-    a: "Ofrecemos préstamos personales de $500 a $25,000. El monto exacto para el que calificas depende de tus ingresos, historial crediticio y otros factores financieros. / We offer personal loans from $500 to $25,000. The exact amount you qualify for depends on your income, credit history, and other financial factors.",
+    a: "Ofrecemos préstamos personales de $200 a $8,000. El monto exacto para el que calificas depende de tus ingresos, historial crediticio y otros factores financieros. / We offer personal loans from $200 to $8,000. The exact amount you qualify for depends on your income, credit history, and other financial factors.",
   },
   {
     q: "¿Cuál es la tasa de interés? / What is the interest rate?",
