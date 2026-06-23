@@ -58,21 +58,59 @@ export function Navbar() {
             />
           </Link>
 
-          {/* Hamburger — always visible on all screen sizes */}
+          {/* Desktop nav — links + buttons directly in the top bar */}
+          <div className="hidden lg:flex items-center gap-6">
+            <nav className="flex items-center gap-5">
+              {links.map((l) => (
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className="text-sm text-white/70 hover:text-[var(--brand-orange)] transition-colors"
+                >
+                  {l.label}
+                </Link>
+              ))}
+            </nav>
+
+            <div className="flex items-center gap-2 pl-2">
+              <button
+                onClick={toggle}
+                className="flex items-center justify-center gap-2 px-3 py-2 rounded-md border border-white/20 text-white/60 hover:border-[var(--brand-orange)]/60 hover:text-[var(--brand-orange)] text-sm font-medium transition-colors"
+              >
+                <Languages className="w-4 h-4" />
+                {lang === "es" ? "EN" : "ES"}
+              </button>
+              <Button
+                variant="outline"
+                asChild
+                className="border-white/20 text-white bg-transparent hover:bg-white/10"
+              >
+                <Link href="/login">{t.login}</Link>
+              </Button>
+              <Button
+                asChild
+                className="bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)]"
+              >
+                <Link href="/apply">{t.apply}</Link>
+              </Button>
+            </div>
+          </div>
+
+          {/* Hamburger — mobile/tablet only */}
           <button
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
             aria-expanded={open}
-            className="p-2 rounded-md text-white/80 hover:text-[var(--brand-orange)] hover:bg-white/5 transition-colors"
+            className="lg:hidden p-2 rounded-md text-white/80 hover:text-[var(--brand-orange)] hover:bg-white/5 transition-colors"
           >
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
       </div>
 
-      {/* Dropdown menu — full width, all screen sizes */}
+      {/* Dropdown menu — mobile/tablet only */}
       {open && (
-        <div className="bg-[var(--brand-black)] border-t border-white/10">
+        <div className="lg:hidden bg-[var(--brand-black)] border-t border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex flex-col gap-1">
 
             {/* Nav links */}
