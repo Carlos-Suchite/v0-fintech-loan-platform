@@ -3,8 +3,9 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { CheckCircle2, Upload, X } from "lucide-react"
+import { CheckCircle2, Upload, X, ShieldCheck } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { PlaidLinkButton } from "@/components/plaid-link-button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -15,7 +16,7 @@ import { useLang } from "@/lib/lang-context"
 const content = {
   es: {
     headerLabel: "Solicitud de Préstamo",
-    steps: ["Información", "Empleo", "Préstamo", "Documentos", "Revisión"],
+    steps: ["Información", "Empleo", "Préstamo", "Documentos", "Banco", "Revisión"],
     submittedTitle: "¡Solicitud Enviada!",
     submittedBody: "Gracias por solicitar con Touch of Vintage. Tu solicitud está en revisión. Recibirás un correo de confirmación y podrás dar seguimiento en tu panel.",
     toDashboard: "Ir al Panel",
@@ -25,6 +26,12 @@ const content = {
     step3Title: "Detalles del Préstamo",
     step4Title: "Subir Documentos",
     step4Sub: "Sube los siguientes documentos para apoyar tu solicitud.",
+    bankTitle: "Vinculación Bancaria",
+    bankSub: "Conecta tu cuenta bancaria de forma segura a través de Plaid para verificar tus datos y agilizar el desembolso. Nunca almacenamos tus credenciales bancarias.",
+    bankConnect: "Conectar tu cuenta bancaria",
+    bankLoading: "Preparando conexión segura...",
+    bankConnected: "Cuenta bancaria vinculada correctamente.",
+    bankSecure: "Conexión cifrada de nivel bancario, gestionada por Plaid.",
     step5Title: "Revisar y Enviar",
     step5Sub: "Por favor revisa los detalles de tu solicitud antes de enviar.",
     fields: {
@@ -71,7 +78,7 @@ const content = {
   },
   en: {
     headerLabel: "Loan Application",
-    steps: ["Personal", "Employment", "Loan", "Documents", "Review"],
+    steps: ["Personal", "Employment", "Loan", "Documents", "Bank", "Review"],
     submittedTitle: "Application Submitted!",
     submittedBody: "Thank you for applying with Touch of Vintage. Your application is now under review. You will receive an email confirmation and can track your status in your dashboard.",
     toDashboard: "Go to Dashboard",
@@ -81,6 +88,12 @@ const content = {
     step3Title: "Loan Details",
     step4Title: "Upload Documents",
     step4Sub: "Please upload the following required documents to support your application.",
+    bankTitle: "Bank Linking",
+    bankSub: "Securely connect your bank account through Plaid to verify your details and speed up disbursement. We never store your banking credentials.",
+    bankConnect: "Connect your bank account",
+    bankLoading: "Preparing secure connection...",
+    bankConnected: "Bank account linked successfully.",
+    bankSecure: "Bank-level encrypted connection, powered by Plaid.",
     step5Title: "Review & Submit",
     step5Sub: "Please review your application details before submitting.",
     fields: {
@@ -133,8 +146,9 @@ export default function ApplyPage() {
   const [step, setStep] = useState(1)
   const [submitted, setSubmitted] = useState(false)
   const [uploadedFiles, setUploadedFiles] = useState<string[]>([])
+  const [bankLinked, setBankLinked] = useState(false)
 
-  const handleNext = () => setStep((s) => Math.min(s + 1, 5))
+  const handleNext = () => setStep((s) => Math.min(s + 1, 6))
   const handleBack = () => setStep((s) => Math.max(s - 1, 1))
   const handleSubmit = () => setSubmitted(true)
   const addFile = (name: string) => setUploadedFiles((f) => (f.includes(name) ? f : [...f, name]))
@@ -308,6 +322,39 @@ export default function ApplyPage() {
 
             {step === 5 && (
               <div>
+                <h2 className="font-serif text-xl font-bold text-foreground mb-2">{t.bankTitle}</h2>
+                <p className="text-sm text-muted-foreground mb-6">{t.bankSub}</p>
+                {bankLinked ? (
+                  <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl p-5">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-green-600" />
+                    </div>
+                    <p className="text-sm font-medium text-green-800">{t.bankConnected}</p>
+                  </div>
+                ) : (
+                  <div className="bg-muted border border-border rounded-xl p-6 flex flex-col items-center text-center gap-5">
+                    <div className="w-14 h-14 rounded-full bg-[var(--brand-orange)]/15 flex items-center justify-center">
+                      <ShieldCheck className="w-7 h-7 text-[var(--brand-orange)]" />
+                    </div>
+                    <div className="w-full max-w-sm">
+                      <PlaidLinkButton
+                        userId="applicant-demo"
+                        label={t.bankConnect}
+                        loadingLabel={t.bankLoading}
+                        onSuccess={() => setBankLinked(true)}
+                      />
+                    </div>
+                    <p className="text-xs text-muted-foreground flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5" />
+                      {t.bankSecure}
+                    </p>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {step === 6 && (
+              <div>
                 <h2 className="font-serif text-xl font-bold text-foreground mb-2">{t.step5Title}</h2>
                 <p className="text-sm text-muted-foreground mb-6">{t.step5Sub}</p>
                 <div className="space-y-4">
@@ -328,7 +375,7 @@ export default function ApplyPage() {
 
             <div className="flex items-center justify-between mt-8 pt-6 border-t border-border">
               <Button variant="outline" onClick={handleBack} disabled={step === 1}>{t.back}</Button>
-              {step < 5 ? (
+              {step < 6 ? (
                 <Button onClick={handleNext} className="bg-[var(--brand-black)] text-white hover:bg-[var(--brand-black-soft)]">{t.continue}</Button>
               ) : (
                 <Button onClick={handleSubmit} className="bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)]">{t.submit}</Button>
