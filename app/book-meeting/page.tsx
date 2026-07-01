@@ -99,7 +99,7 @@ export default function BookMeetingPage() {
       <Navbar />
 
       {/* Header */}
-      <div className="pt-28 pb-16 px-4 bg-[var(--brand-black)]">
+      <div className="pt-20 pb-8 px-4 bg-[var(--brand-black)]">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">{t.tag}</p>
           <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-5 text-balance">{t.h1}</h1>
@@ -107,7 +107,7 @@ export default function BookMeetingPage() {
         </div>
       </div>
 
-      <section className="py-16 px-4 bg-background">
+      <section className="pt-8 pb-16 px-4 bg-background">
         <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-8">
 
           {/* Calendar */}

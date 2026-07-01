@@ -5,7 +5,7 @@ export default function PrivacyPage() {
   return (
     <main>
       <Navbar />
-      <div className="pt-28 pb-16 px-4 bg-[var(--brand-black)]">
+      <div className="pt-20 pb-16 px-4 bg-[var(--brand-black)]">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="font-serif text-4xl font-bold text-white mb-2">Política de Privacidad</h1>
           <p className="text-[var(--brand-orange)] italic mb-2">Privacy Policy</p>

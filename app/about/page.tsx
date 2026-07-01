@@ -66,7 +66,7 @@ export default function AboutPage() {
   return (
     <main>
       <Navbar />
-      <div className="pt-28 pb-16 px-4 bg-[var(--brand-black)]">
+      <div className="pt-20 pb-8 px-4 bg-[var(--brand-black)]">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">{t.tag}</p>
           <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-5 text-balance">{t.h1}</h1>
@@ -74,7 +74,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <section className="py-20 px-4 bg-background">
+      <section className="pt-10 pb-20 px-4 bg-background">
         <div className="max-w-4xl mx-auto">
           <div className="space-y-5 text-muted-foreground leading-relaxed mb-16">
             {t.body.map((p, i) => <p key={i}>{p}</p>)}

@@ -79,18 +79,32 @@ export default function HomePage() {
               className="flex flex-col items-center gap-2.5"
               style={{ animation: "fadeUp 0.9s ease 0.15s both" }}
             >
-              <Image
-                src="/logo.jpg"
-                alt="Touch of Vintage"
-                width={500}
-                height={200}
-                priority
-                className="h-auto"
+              {/*
+                The logo.jpg has a solid black background.
+                We place it inside a navy-coloured container and use
+                mix-blend-mode:screen so black pixels (value 0,0,0) become
+                invisible when screened against the navy — only the
+                white/orange anchor & text remain visible.
+              */}
+              <div
                 style={{
                   width: "clamp(260px, 44vw, 480px)",
-                  filter: "brightness(1.08) drop-shadow(0 6px 28px rgba(0,0,0,0.65))",
+                  background: "#0e1d42",
+                  borderRadius: "4px",
+                  overflow: "hidden",
+                  isolation: "isolate",
                 }}
-              />
+              >
+                <Image
+                  src="/logo.jpg"
+                  alt="Touch of Vintage"
+                  width={500}
+                  height={200}
+                  priority
+                  className="h-auto w-full block"
+                  style={{ mixBlendMode: "screen" }}
+                />
+              </div>
               <span
                 className="text-[11px] font-medium tracking-[0.28em] uppercase mt-0.5"
                 style={{ color: "rgba(255,255,255,0.65)" }}
