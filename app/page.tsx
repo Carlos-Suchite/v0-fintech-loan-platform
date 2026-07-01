@@ -5,6 +5,9 @@ import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { useLang } from "@/lib/lang-context"
 
+// ── Background image — extracted from the provided HTML (base64 webp) ──────
+const BG_IMAGE = `data:image/webp;base64,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`
+
 const copy = {
   es: {
     prompt: "¿Cómo podemos ayudarte hoy?",
@@ -38,24 +41,24 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Fixed navbar sits above everything */}
+      {/* Fixed navbar stays on top */}
       <Navbar />
 
       {/* Full-screen page */}
       <div className="relative min-h-screen flex flex-col overflow-hidden">
 
-        {/* Background image */}
+        {/* Background image layer */}
         <div
           className="fixed inset-0 z-0"
           style={{
-            backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PHOTO-2026-03-07-12-23-36-6YPjwjB8NZ9g9COwyBJ899pD9XEZzS.jpg')",
+            backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PHOTO-2026-03-07-12-23-36-6YPjwjB8NZ9g9COwyBJ899pD9XEZzS.jpg')`,
             backgroundSize: "cover",
             backgroundPosition: "center 40%",
             filter: "brightness(0.62) saturate(0.8)",
           }}
         />
 
-        {/* Navy tinted overlay */}
+        {/* Blue-tinted overlay */}
         <div
           className="fixed inset-0 z-[1]"
           style={{
@@ -64,12 +67,13 @@ export default function HomePage() {
           }}
         />
 
-        {/* Content — above bg layers, below navbar */}
+        {/* Content — above bg, below navbar */}
         <div className="relative z-[2] flex flex-col min-h-screen pt-16">
 
           {/* Main center */}
-          <main className="flex-1 flex flex-col items-center justify-center px-6 py-16 gap-10">
-
+          <main
+            className="flex-1 flex flex-col items-center justify-center px-6 py-16 gap-10"
+          >
             {/* Logo */}
             <div
               className="flex flex-col items-center gap-2.5"
@@ -80,19 +84,22 @@ export default function HomePage() {
                 alt="Touch of Vintage"
                 width={500}
                 height={200}
-                className="w-[clamp(260px,44vw,480px)] h-auto drop-shadow-2xl"
-                style={{ filter: "brightness(1.08) drop-shadow(0 6px 28px rgba(0,0,0,0.65))" }}
                 priority
+                className="h-auto"
+                style={{
+                  width: "clamp(260px, 44vw, 480px)",
+                  filter: "brightness(1.08) drop-shadow(0 6px 28px rgba(0,0,0,0.65))",
+                }}
               />
               <span
-                className="text-[11px] font-medium tracking-[0.28em] uppercase"
+                className="text-[11px] font-medium tracking-[0.28em] uppercase mt-0.5"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
                 Financial Services
               </span>
             </div>
 
-            {/* Divider */}
+            {/* Orange divider */}
             <div
               className="w-12 h-0.5 rounded-full"
               style={{
@@ -107,7 +114,8 @@ export default function HomePage() {
               style={{ animation: "fadeUp 0.9s ease 0.4s both" }}
             >
               <h2
-                className="font-serif text-[clamp(1.4rem,3vw,2rem)] font-medium text-white mb-2 text-balance"
+                className="font-serif font-medium text-white mb-2 text-balance"
+                style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)" }}
               >
                 {t.prompt}
               </h2>
@@ -124,16 +132,21 @@ export default function HomePage() {
               className="flex flex-col sm:flex-row gap-4 w-full max-w-[560px]"
               style={{ animation: "fadeUp 0.9s ease 0.55s both" }}
             >
-              {/* Individuals — orange */}
+              {/* Individuals — burnt orange */}
               <Link
                 href="/apply"
-                className="group flex-1 flex items-center justify-between px-6 py-[18px] rounded-md transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                className="group relative flex-1 flex items-center justify-between px-6 py-[18px] rounded-md overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
                 style={{
                   background: "linear-gradient(135deg, #C05528 0%, #9E3F19 100%)",
                   boxShadow: "0 4px 24px rgba(192,85,40,0.45)",
+                  textDecoration: "none",
                 }}
               >
-                <div className="flex flex-col gap-1 text-left">
+                <span
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  style={{ background: "rgba(255,255,255,0.07)" }}
+                />
+                <div className="flex flex-col gap-0.5 text-left relative">
                   <span className="font-serif text-[1.05rem] font-bold text-white leading-none">
                     {t.individuals}
                   </span>
@@ -145,7 +158,7 @@ export default function HomePage() {
                   </span>
                 </div>
                 <span
-                  className="text-[1.1rem] transition-transform duration-200 group-hover:translate-x-1"
+                  className="text-[1.1rem] relative transition-transform duration-200 group-hover:translate-x-1"
                   style={{ color: "rgba(255,255,255,0.8)" }}
                 >
                   →
@@ -155,13 +168,18 @@ export default function HomePage() {
               {/* Commercial — navy */}
               <Link
                 href="/contact"
-                className="group flex-1 flex items-center justify-between px-6 py-[18px] rounded-md transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                className="group relative flex-1 flex items-center justify-between px-6 py-[18px] rounded-md overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
                 style={{
                   background: "linear-gradient(135deg, #2C3E55 0%, #1A2D45 100%)",
                   boxShadow: "0 4px 24px rgba(20,40,80,0.55)",
+                  textDecoration: "none",
                 }}
               >
-                <div className="flex flex-col gap-1 text-left">
+                <span
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  style={{ background: "rgba(255,255,255,0.07)" }}
+                />
+                <div className="flex flex-col gap-0.5 text-left relative">
                   <span className="font-serif text-[1.05rem] font-bold text-white leading-none">
                     {t.commercial}
                   </span>
@@ -173,14 +191,13 @@ export default function HomePage() {
                   </span>
                 </div>
                 <span
-                  className="text-[1.1rem] transition-transform duration-200 group-hover:translate-x-1"
+                  className="text-[1.1rem] relative transition-transform duration-200 group-hover:translate-x-1"
                   style={{ color: "rgba(255,255,255,0.8)" }}
                 >
                   →
                 </span>
               </Link>
             </div>
-
           </main>
 
           {/* Footer */}
@@ -198,7 +215,11 @@ export default function HomePage() {
               {t.copy}
             </span>
             <nav className="flex gap-5">
-              {[{ label: t.privacy, href: "/privacy" }, { label: t.terms, href: "/terms" }, { label: t.contact, href: "/contact" }].map((l) => (
+              {[
+                { label: t.privacy, href: "/privacy" },
+                { label: t.terms, href: "/terms" },
+                { label: t.contact, href: "/contact" },
+              ].map((l) => (
                 <Link
                   key={l.href}
                   href={l.href}
@@ -210,7 +231,6 @@ export default function HomePage() {
               ))}
             </nav>
           </footer>
-
         </div>
       </div>
 
