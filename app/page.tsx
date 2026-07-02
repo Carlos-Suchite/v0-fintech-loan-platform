@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 import Image from "next/image"
-import { Navbar } from "@/components/navbar"
 import { useLang } from "@/lib/lang-context"
 
 // ── Background image — extracted from the provided HTML (base64 webp) ──────
@@ -41,9 +40,6 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Fixed navbar stays on top */}
-      <Navbar />
-
       {/* Full-screen page */}
       <div className="relative min-h-screen flex flex-col overflow-hidden">
 

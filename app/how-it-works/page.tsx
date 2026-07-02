@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { CTASection } from "@/components/home/cta-section"
 import { ClipboardList, Search, BadgeCheck, Banknote, ArrowRight } from "lucide-react"
@@ -75,8 +74,7 @@ const steps = [
 export default function HowItWorksPage() {
   return (
     <main>
-      <Navbar />
-      <div className="relative pt-20 pb-8 px-4 bg-[var(--brand-black)]">
+      <div className="relative pt-8 pb-8 px-4 bg-[var(--brand-black)]">
         <div className="absolute top-0 left-0 right-0 h-1 bg-[var(--brand-orange)]" />
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">Proceso / Process</p>

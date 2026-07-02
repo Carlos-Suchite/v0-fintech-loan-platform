@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Navbar } from "@/components/navbar"
 
 const products = [
   {
@@ -104,8 +103,6 @@ const values = [
 export default function IndividualsPage() {
   return (
     <>
-      <Navbar />
-
       <div style={{ fontFamily: "'Inter', sans-serif", overflowX: "hidden" }}>
 
         {/* SECTION 1: HERO — dark navy */}
@@ -113,7 +110,6 @@ export default function IndividualsPage() {
           background: "linear-gradient(135deg, #0b1929 0%, #12243a 60%, #0e1d30 100%)",
           position: "relative",
           overflow: "hidden",
-          paddingTop: "64px", // navbar offset
         }}>
           {/* Radial orange glow */}
           <div style={{

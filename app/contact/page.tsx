@@ -2,7 +2,6 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { Navbar } from "@/components/navbar"
 
 /* ─── Data ─────────────────────────────────────────────── */
 
@@ -97,8 +96,6 @@ const values = [
 export default function CommercialPage() {
   return (
     <>
-      <Navbar />
-
       {/* ── HERO ───────────────────────────────────────────── */}
       <section
         style={{
