@@ -148,7 +148,7 @@ export default function HomePage() {
             >
               {/* Individuals — burnt orange */}
               <Link
-                href="/apply"
+                href="/individuals"
                 className="group relative flex-1 flex items-center justify-between px-6 py-[18px] rounded-md overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
                 style={{
                   background: "linear-gradient(135deg, #C05528 0%, #9E3F19 100%)",
