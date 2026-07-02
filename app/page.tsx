@@ -72,39 +72,26 @@ export default function HomePage() {
 
           {/* Main center */}
           <main
-            className="flex-1 flex flex-col items-center justify-center px-6 py-16 gap-10"
+            className="flex-1 flex flex-col items-center justify-center px-6 py-[60px] gap-[40px]"
           >
             {/* Logo */}
             <div
               className="flex flex-col items-center gap-2.5"
               style={{ animation: "fadeUp 0.9s ease 0.15s both" }}
             >
-              {/*
-                The logo.jpg has a solid black background.
-                We place it inside a navy-coloured container and use
-                mix-blend-mode:screen so black pixels (value 0,0,0) become
-                invisible when screened against the navy — only the
-                white/orange anchor & text remain visible.
-              */}
-              <div
+              <Image
+                src="/logo.jpg"
+                alt="Touch of Vintage"
+                width={600}
+                height={240}
+                priority
+                className="h-auto block"
                 style={{
-                  width: "clamp(260px, 44vw, 480px)",
-                  background: "#0e1d42",
-                  borderRadius: "4px",
-                  overflow: "hidden",
-                  isolation: "isolate",
+                  width: "clamp(320px, 46vw, 500px)",
+                  mixBlendMode: "screen",
+                  filter: "brightness(1.08) drop-shadow(0 6px 28px rgba(0,0,0,0.65))",
                 }}
-              >
-                <Image
-                  src="/logo.jpg"
-                  alt="Touch of Vintage"
-                  width={500}
-                  height={200}
-                  priority
-                  className="h-auto w-full block"
-                  style={{ mixBlendMode: "screen" }}
-                />
-              </div>
+              />
               <span
                 className="text-[11px] font-medium tracking-[0.28em] uppercase mt-0.5"
                 style={{ color: "rgba(255,255,255,0.65)" }}
