@@ -47,10 +47,10 @@ export default function HomePage() {
         <div
           className="fixed inset-0 z-0"
           style={{
-            backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PHOTO-2026-03-07-12-23-36-6YPjwjB8NZ9g9COwyBJ899pD9XEZzS.jpg')`,
+            backgroundImage: `url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/PHOTO-2026-07-02-17-13-10-WabD3jJlnlU7QSSiZP5KvRCS6YW28P.jpg')`,
             backgroundSize: "cover",
-            backgroundPosition: "center 40%",
-            filter: "brightness(0.62) saturate(0.8)",
+            backgroundPosition: "center center",
+            filter: "brightness(0.75) saturate(0.9)",
           }}
         />
 
@@ -84,8 +84,8 @@ export default function HomePage() {
                 className="h-auto block"
                 style={{
                   width: "clamp(320px, 46vw, 500px)",
-                  mixBlendMode: "screen",
-                  filter: "brightness(1.08) drop-shadow(0 6px 28px rgba(0,0,0,0.65))",
+                  borderRadius: "6px",
+                  filter: "drop-shadow(0 6px 28px rgba(0,0,0,0.7))",
                 }}
               />
               <span
