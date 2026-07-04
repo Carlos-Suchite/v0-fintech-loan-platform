@@ -84,8 +84,8 @@ export default function HomePage() {
                 className="h-auto block"
                 style={{
                   width: "clamp(320px, 46vw, 500px)",
-                  mixBlendMode: "screen",
-                  filter: "brightness(1.05) drop-shadow(0 6px 28px rgba(0,0,0,0.5))",
+                  mixBlendMode: "multiply",
+                  filter: "drop-shadow(0 4px 20px rgba(0,0,0,0.4))",
                 }}
               />
               <span
