@@ -76,16 +76,15 @@ export default function HomePage() {
               style={{ animation: "fadeUp 0.9s ease 0.15s both" }}
             >
               <Image
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Touch of Vintage"
                 width={600}
-                height={240}
+                height={600}
                 priority
                 className="h-auto block"
                 style={{
-                  width: "clamp(320px, 46vw, 500px)",
-                  mixBlendMode: "multiply",
-                  filter: "drop-shadow(0 4px 20px rgba(0,0,0,0.4))",
+                  width: "clamp(280px, 40vw, 440px)",
+                  filter: "drop-shadow(0 2px 16px rgba(0,0,0,0.5))",
                 }}
               />
               <span
