@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { CTASection } from "@/components/home/cta-section"
 import { ClipboardList, Search, BadgeCheck, Banknote, ArrowRight } from "lucide-react"
@@ -75,8 +74,7 @@ const steps = [
 export default function HowItWorksPage() {
   return (
     <main>
-      <Navbar />
-      <div className="pt-28 pb-16 px-4 bg-[var(--brand-black)]">
+      <div className="relative pt-8 pb-8 px-4 bg-[var(--brand-black)]">
         <div className="absolute top-0 left-0 right-0 h-1 bg-[var(--brand-orange)]" />
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">Proceso / Process</p>
@@ -90,7 +88,7 @@ export default function HowItWorksPage() {
         </div>
       </div>
 
-      <section className="py-20 px-4 bg-background">
+      <section className="pt-10 pb-20 px-4 bg-background">
         <div className="max-w-4xl mx-auto flex flex-col gap-12">
           {steps.map(({ icon: Icon, step, title, titleEn, description, descriptionEn, details }, i) => (
             <div key={step} className="flex flex-col sm:flex-row gap-6 sm:gap-10">

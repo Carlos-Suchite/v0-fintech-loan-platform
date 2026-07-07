@@ -1,6 +1,5 @@
 "use client"
 
-import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { CTASection } from "@/components/home/cta-section"
 import { CheckCircle2, XCircle, FileText, User, Briefcase, DollarSign } from "lucide-react"
@@ -93,8 +92,7 @@ export default function RequirementsPage() {
 
   return (
     <main>
-      <Navbar />
-      <div className="pt-28 pb-16 px-4 bg-[var(--brand-black)]">
+      <div className="pt-8 pb-8 px-4 bg-[var(--brand-black)]">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-sm font-semibold text-[var(--brand-orange)] uppercase tracking-widest mb-3">{t.tag}</p>
           <h1 className="font-serif text-4xl sm:text-5xl font-bold text-white mb-5 text-balance">{t.h1}</h1>
@@ -102,7 +100,7 @@ export default function RequirementsPage() {
         </div>
       </div>
 
-      <section className="py-20 px-4 bg-background">
+      <section className="pt-10 pb-20 px-4 bg-background">
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           <div className="bg-card border border-border rounded-2xl p-7">
             <h2 className="font-serif text-xl font-bold text-foreground mb-6">{t.eligibleTitle}</h2>
