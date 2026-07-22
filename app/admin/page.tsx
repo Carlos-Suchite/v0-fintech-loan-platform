@@ -3,10 +3,10 @@ import { DollarSign, Users, FileText, Calendar, TrendingUp, ArrowRight } from "l
 import { StatusBadge } from "@/components/status-badge"
 
 const stats = [
-  { label: "Total Financiado / Total Funded", value: "$82K", change: "+12% este mes / this month", icon: DollarSign, color: "var(--brand-orange)" },
-  { label: "Usuarios Activos / Active Users", value: "342", change: "+28 esta semana / this week", icon: Users, color: "var(--brand-orange)" },
-  { label: "Solicitudes Pendientes / Pending", value: "18", change: "Requiere revisión / Needs review", icon: FileText, color: "var(--brand-orange)" },
-  { label: "Citas Hoy / Appointments Today", value: "7", change: "3 próximas / upcoming", icon: Calendar, color: "var(--brand-orange)" },
+  { label: "Total Funded", value: "$82K", change: "+12% this month", icon: DollarSign, color: "var(--brand-orange)" },
+  { label: "Active Users", value: "342", change: "+28 this week", icon: Users, color: "var(--brand-orange)" },
+  { label: "Pending Applications", value: "18", change: "Needs review", icon: FileText, color: "var(--brand-orange)" },
+  { label: "Appointments Today", value: "7", change: "3 upcoming", icon: Calendar, color: "var(--brand-orange)" },
 ]
 
 const recentApplications = [
@@ -27,9 +27,8 @@ export default function AdminPage() {
   return (
     <div className="max-w-6xl mx-auto">
       <div className="mb-8">
-        <h1 className="font-serif text-2xl font-bold text-foreground">Panel de Administración</h1>
-        <p className="text-[var(--brand-orange)] italic text-sm">Admin Overview</p>
-        <p className="text-muted-foreground text-sm mt-1">Bienvenido. Resumen de toda la actividad de la plataforma. / Welcome back. Summary of all platform activity.</p>
+        <h1 className="font-serif text-2xl font-bold text-foreground">Admin Overview</h1>
+        <p className="text-muted-foreground text-sm mt-1">Welcome back. Summary of all platform activity.</p>
       </div>
 
       {/* Stats */}
@@ -55,9 +54,9 @@ export default function AdminPage() {
         {/* Recent Applications */}
         <div className="lg:col-span-2 bg-card border border-border rounded-2xl overflow-hidden">
           <div className="px-6 py-4 border-b border-border flex items-center justify-between">
-            <h2 className="font-semibold text-foreground">Solicitudes Recientes / Recent Applications</h2>
+            <h2 className="font-semibold text-foreground">Recent Applications</h2>
             <Link href="/admin/applications" className="text-xs text-[var(--brand-orange)] hover:underline flex items-center gap-1">
-              Ver todas / View all <ArrowRight className="w-3 h-3" />
+              View all <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
           <div className="divide-y divide-border">
@@ -87,8 +86,8 @@ export default function AdminPage() {
         {/* Upcoming Appointments */}
         <div className="bg-card border border-border rounded-2xl overflow-hidden">
           <div className="px-6 py-4 border-b border-border flex items-center justify-between">
-            <h2 className="font-semibold text-foreground">Próximas Citas / Upcoming Meetings</h2>
-            <Link href="/admin/appointments" className="text-xs text-[var(--brand-orange)] hover:underline">Ver todas / View all</Link>
+            <h2 className="font-semibold text-foreground">Upcoming Meetings</h2>
+            <Link href="/admin/appointments" className="text-xs text-[var(--brand-orange)] hover:underline">View all</Link>
           </div>
           <div className="divide-y divide-border">
             {upcomingAppointments.map((apt) => (

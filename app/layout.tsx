@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })
 
 export const metadata: Metadata = {
-  title: 'Touch of Vintage — Préstamos Personales / Personal Loans',
-  description: 'Solicita tu préstamo personal en minutos. Tasas transparentes, decisiones rápidas y atención dedicada. Apply for a personal loan in minutes — fast, transparent, and trusted.',
+  title: 'Touch of Vintage — Personal Loans',
+  description: 'Apply for a personal loan in minutes. Transparent rates, fast decisions, and dedicated support.',
   generator: 'v0.app',
   icons: {
     icon: [

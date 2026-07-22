@@ -15,11 +15,11 @@ import {
 import { cn } from "@/lib/utils"
 
 const navItems = [
-  { label: "Resumen / Overview", href: "/dashboard", icon: LayoutDashboard },
-  { label: "Mis Préstamos / My Loans", href: "/dashboard/loans", icon: FileText },
-  { label: "Documentos / Documents", href: "/dashboard/documents", icon: Upload },
-  { label: "Citas / Appointments", href: "/dashboard/appointments", icon: Calendar },
-  { label: "Perfil / Profile", href: "/dashboard/profile", icon: User },
+  { label: "Overview", href: "/dashboard", icon: LayoutDashboard },
+  { label: "My Loans", href: "/dashboard/loans", icon: FileText },
+  { label: "Documents", href: "/dashboard/documents", icon: Upload },
+  { label: "Appointments", href: "/dashboard/appointments", icon: Calendar },
+  { label: "Profile", href: "/dashboard/profile", icon: User },
 ]
 
 interface SidebarProps {
@@ -50,7 +50,7 @@ export function Sidebar({ mobile, onClose }: SidebarProps) {
       </div>
 
       <nav className="flex-1 p-4 overflow-y-auto">
-        <p className="text-xs text-white/30 uppercase tracking-widest px-3 mb-3">Panel del Cliente / Client Portal</p>
+        <p className="text-xs text-white/30 uppercase tracking-widest px-3 mb-3">Client Portal</p>
         <ul className="flex flex-col gap-1">
           {navItems.map(({ label, href, icon: Icon }) => (
             <li key={href}>
@@ -79,7 +79,7 @@ export function Sidebar({ mobile, onClose }: SidebarProps) {
           </div>
           <div>
             <p className="text-sm text-white font-medium">María García</p>
-            <p className="text-xs text-white/40">Cliente / Client</p>
+            <p className="text-xs text-white/40">Client</p>
           </div>
         </div>
         <Link
@@ -87,7 +87,7 @@ export function Sidebar({ mobile, onClose }: SidebarProps) {
           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
         >
           <LogOut className="w-4 h-4" />
-          Cerrar Sesión / Sign Out
+          Sign Out
         </Link>
       </div>
     </aside>
