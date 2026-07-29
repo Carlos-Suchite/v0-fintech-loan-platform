@@ -12,12 +12,14 @@ import {
   LogOut,
   Gem,
   X,
+  Landmark,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const navItems = [
   { label: "Resumen / Overview", href: "/admin", icon: LayoutDashboard },
   { label: "Solicitudes / Applications", href: "/admin/applications", icon: FileText },
+  { label: "Desembolsos y Cobros / Payouts", href: "/admin/dwolla", icon: Landmark },
   { label: "Usuarios / Users", href: "/admin/users", icon: Users },
   { label: "Documentos / Documents", href: "/admin/documents", icon: Upload },
   { label: "Citas / Appointments", href: "/admin/appointments", icon: Calendar },

@@ -175,7 +175,7 @@ export default function CommercialPage() {
                 </ul>
 
                 <Link
-                  href="/apply"
+                  href="/apply?division=commercial"
                   style={{ display: "inline-flex", alignItems: "center", gap: 8, fontSize: 11, fontWeight: 600, letterSpacing: "0.14em", textTransform: "uppercase", color: "#fff", background: "linear-gradient(135deg,#C05528 0%,#9E3F19 100%)", padding: "10px 20px", borderRadius: 5, textDecoration: "none" }}
                 >
                   {p.cta}
