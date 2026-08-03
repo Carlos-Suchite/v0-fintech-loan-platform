@@ -15,16 +15,17 @@ interface Application {
   loan_amount: number | null
   status: string | null
   loandisk_borrower_id: string | null
-  dwolla_customer_url: string | null
-  dwolla_funding_source_url: string | null
+  stripe_customer_id: string | null
+  stripe_connect_account_id: string | null
+  stripe_repayment_payment_method_id: string | null
   created_at: string
 }
 
-// Not automatic — every action here calls the real Dwolla API and moves real money
-// (or, in Sandbox, simulated money). Gated by a shared staff password (lib/staff-auth.ts)
+// Not automatic — every action here calls the real Stripe API and moves real money
+// (or, in test mode, simulated money). Gated by a shared staff password (lib/staff-auth.ts)
 // since this is meaningfully more sensitive than the rest of /admin, which is still
 // mockup data with no real actions behind it.
-export default function DwollaAdminPage() {
+export default function StripeAdminPage() {
   const [authChecked, setAuthChecked] = useState(false)
   const [authenticated, setAuthenticated] = useState(false)
   const [password, setPassword] = useState("")
@@ -140,10 +141,12 @@ export default function DwollaAdminPage() {
     <div className="max-w-5xl mx-auto">
       <div className="mb-8">
         <h1 className="font-serif text-2xl font-bold text-foreground">Desembolsos y Cobros</h1>
-        <p className="text-[var(--brand-orange)] italic text-sm">Dwolla — ACH</p>
+        <p className="text-[var(--brand-orange)] italic text-sm">Stripe — ACH</p>
         <p className="text-muted-foreground text-sm mt-1">
-          Prepara la cuenta bancaria del prestatario en Dwolla, luego desembolsa o cobra pagos. Cada transferencia
-          queda &quot;pendiente&quot; hasta que Dwolla confirme (1-4 días hábiles).
+          Prepara la cuenta de Stripe del prestatario, luego desembolsa o cobra pagos. Cada transferencia queda
+          &quot;pendiente&quot; hasta que Stripe confirme (2-4 días hábiles). La cuenta bancaria del prestatario se
+          vincula en el propio formulario de solicitud (/apply) vía Stripe Financial Connections — este panel no
+          puede vincularla por él.
         </p>
       </div>
 
@@ -152,7 +155,8 @@ export default function DwollaAdminPage() {
       <div className="space-y-4">
         {applications.map((app) => {
           const name = `${app.first_name ?? ""} ${app.last_name ?? ""}`.trim() || "(sin nombre)"
-          const ready = Boolean(app.dwolla_funding_source_url)
+          const hasStripeAccounts = Boolean(app.stripe_customer_id && app.stripe_connect_account_id)
+          const ready = Boolean(app.stripe_repayment_payment_method_id)
           const amount = amounts[app.application_id] ?? ""
           const loanId = loanIds[app.application_id] ?? ""
           const msg = message[app.application_id]
@@ -169,18 +173,23 @@ export default function DwollaAdminPage() {
                 <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">{app.status}</span>
               </div>
 
-              {!ready ? (
+              {!hasStripeAccounts ? (
                 <Button
                   size="sm"
-                  disabled={busyId === app.application_id + "/api/dwolla/setup-borrower"}
-                  onClick={() => callAction(app.application_id, "/api/dwolla/setup-borrower", {})}
+                  disabled={busyId === app.application_id + "/api/stripe/setup-borrower"}
+                  onClick={() => callAction(app.application_id, "/api/stripe/setup-borrower", {})}
                 >
-                  {busyId === app.application_id + "/api/dwolla/setup-borrower" ? (
+                  {busyId === app.application_id + "/api/stripe/setup-borrower" ? (
                     <Loader2 className="w-4 h-4 animate-spin" />
                   ) : (
-                    "Preparar en Dwolla"
+                    "Crear cuenta en Stripe"
                   )}
                 </Button>
+              ) : !ready ? (
+                <p className="text-xs text-amber-700 bg-amber-50 rounded-lg p-2">
+                  Cuenta de Stripe creada. Falta que el prestatario vincule su cuenta bancaria desde /apply antes de
+                  poder desembolsar o cobrar.
+                </p>
               ) : (
                 <div className="flex flex-wrap items-end gap-3">
                   <div className="flex flex-col gap-1">
@@ -203,18 +212,18 @@ export default function DwollaAdminPage() {
                   <Button
                     size="sm"
                     variant="outline"
-                    disabled={!amount || busyId === app.application_id + "/api/dwolla/disburse"}
-                    onClick={() => callAction(app.application_id, "/api/dwolla/disburse", { amount: Number(amount), loandiskLoanId: loanId || null })}
+                    disabled={!amount || busyId === app.application_id + "/api/stripe/disburse"}
+                    onClick={() => callAction(app.application_id, "/api/stripe/disburse", { amount: Number(amount), loandiskLoanId: loanId || null })}
                   >
-                    {busyId === app.application_id + "/api/dwolla/disburse" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Desembolsar"}
+                    {busyId === app.application_id + "/api/stripe/disburse" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Desembolsar"}
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
-                    disabled={!amount || busyId === app.application_id + "/api/dwolla/collect-repayment"}
-                    onClick={() => callAction(app.application_id, "/api/dwolla/collect-repayment", { amount: Number(amount), loandiskLoanId: loanId || null })}
+                    disabled={!amount || busyId === app.application_id + "/api/stripe/collect-repayment"}
+                    onClick={() => callAction(app.application_id, "/api/stripe/collect-repayment", { amount: Number(amount), loandiskLoanId: loanId || null })}
                   >
-                    {busyId === app.application_id + "/api/dwolla/collect-repayment" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Cobrar Pago"}
+                    {busyId === app.application_id + "/api/stripe/collect-repayment" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Cobrar Pago"}
                   </Button>
                 </div>
               )}

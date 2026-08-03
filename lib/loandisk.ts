@@ -131,7 +131,10 @@ export async function createBorrower(payload: BorrowerPayload): Promise<{ borrow
 function repaymentMethodId(division: "consumer" | "commercial" | null): string {
   // Repayment methods are branch-scoped in LoanDisk — confirmed live 2026-07-28 by
   // creating "ACH - Dwolla" on both branches and getting back two different IDs
-  // (370058 Consumer, 370059 Commercial), unlike collectors which are shared.
+  // (370058 Consumer, 370059 Commercial), unlike collectors which are shared. Still
+  // named "ACH - Dwolla" in LoanDisk as of the Stripe switch (2026-08-01) — same IDs,
+  // just rename the entries under Admin → Loans → Loan Repayment Methods whenever
+  // convenient (not urgent, it's just a label).
   const commercial = process.env.LOANDISK_REPAYMENT_METHOD_ACH_COMMERCIAL
   const consumer = process.env.LOANDISK_REPAYMENT_METHOD_ACH_CONSUMER
   return division === "commercial" ? (commercial ?? "") : (consumer ?? "")
@@ -145,8 +148,8 @@ export interface RepaymentPayload {
   description?: string | null
 }
 
-// Records a confirmed Dwolla repayment collection against an existing LoanDisk loan.
-// Only call this once the transfer is truly final (Dwolla webhook status "processed")
+// Records a confirmed Stripe repayment collection against an existing LoanDisk loan.
+// Only call this once the transfer is truly final (Stripe webhook status "processed")
 // — never for a "pending" ACH transfer, since those can still bounce for days.
 export async function createRepayment(payload: RepaymentPayload): Promise<{ repaymentId: string }> {
   const config = getConfig()
@@ -169,7 +172,7 @@ export async function createRepayment(payload: RepaymentPayload): Promise<{ repa
     loan_repayment_method_id: methodId,
     repayment_collected_date: `${mm}/${dd}/${yyyy}`,
     collector_id: collectorId,
-    repayment_description: payload.description ?? "Cobro automático vía Dwolla (ACH)",
+    repayment_description: payload.description ?? "Cobro automático vía Stripe (ACH)",
   })
 
   if (!data.repayment_id) throw new Error("LoanDisk no devolvió un repayment_id.")

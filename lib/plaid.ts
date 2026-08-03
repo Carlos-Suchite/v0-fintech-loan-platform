@@ -1,4 +1,4 @@
-import { Configuration, PlaidApi, PlaidEnvironments, ProcessorTokenCreateRequestProcessorEnum } from "plaid"
+import { Configuration, PlaidApi, PlaidEnvironments } from "plaid"
 import { getSupabaseClient } from "@/lib/supabase"
 import { decrypt } from "@/lib/crypto"
 
@@ -54,25 +54,8 @@ export async function getAuthData(client: PlaidApi, accessToken: string) {
     accountType: account?.subtype ?? account?.type ?? null,
     accountNumber: achNumbers?.account ?? null,
     routingNumber: achNumbers?.routing ?? null,
-    // Needed later to create a Plaid→Dwolla processor token (lib/dwolla.ts) — Dwolla
-    // fetches the real account/routing numbers itself, so we never need to reuse
-    // accountNumber/routingNumber above for that.
     accountId: account?.account_id ?? null,
   }
-}
-
-// One-time token that lets Dwolla fetch this account's real account/routing numbers
-// directly from Plaid without them ever passing through our server (see lib/dwolla.ts).
-// Requires the "Dwolla" integration to be enabled at
-// https://dashboard.plaid.com/developers/integrations — without that this fails with
-// INVALID_PRODUCT ("not enabled for the Dwolla integration"), confirmed 2026-07-28.
-export async function createDwollaProcessorToken(client: PlaidApi, accessToken: string, accountId: string): Promise<string> {
-  const response = await client.processorTokenCreate({
-    access_token: accessToken,
-    account_id: accountId,
-    processor: ProcessorTokenCreateRequestProcessorEnum.Dwolla,
-  })
-  return response.data.processor_token
 }
 
 export async function getIdentityData(client: PlaidApi, accessToken: string) {
