@@ -91,6 +91,14 @@ function toLoanDiskDate(isoDate: string | null): string | null {
   return `${month}/${day}/${year}`
 }
 
+// LoanDisk's borrower_mobile rejects anything but digits ("Mobile must be numbers
+// only") — the /apply form's phone input accepts formatted input like
+// "+1 (555) 000-0000", so it must be stripped before this call.
+function toLoanDiskMobile(phone: string | null): string | null {
+  if (!phone) return null
+  return phone.replace(/\D/g, "") || null
+}
+
 // Creates a new borrower with the Plaid custom fields already set — done in a single
 // POST (not POST-then-PUT) specifically to avoid LoanDisk's "PUT wipes omitted fields"
 // behavior. Returns { borrowerId }.
@@ -108,7 +116,7 @@ export async function createBorrower(payload: BorrowerPayload): Promise<{ borrow
     borrower_firstname: payload.firstName,
     borrower_lastname: payload.lastName,
     borrower_email: payload.email,
-    borrower_mobile: payload.phone,
+    borrower_mobile: toLoanDiskMobile(payload.phone),
     borrower_address: payload.address,
     borrower_city: payload.city,
     borrower_province: payload.state,
