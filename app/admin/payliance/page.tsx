@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Loader2, Lock, CheckCircle2, AlertCircle } from "lucide-react"
+import { Loader2, Lock, CheckCircle2, AlertCircle, RefreshCw } from "lucide-react"
 
 interface Application {
   application_id: string
@@ -15,17 +15,16 @@ interface Application {
   loan_amount: number | null
   status: string | null
   loandisk_borrower_id: string | null
-  stripe_customer_id: string | null
-  stripe_connect_account_id: string | null
-  stripe_repayment_payment_method_id: string | null
+  bank_linked: boolean
   created_at: string
 }
 
-// Not automatic — every action here calls the real Stripe API and moves real money
-// (or, in test mode, simulated money). Gated by a shared staff password (lib/staff-auth.ts)
-// since this is meaningfully more sensitive than the rest of /admin, which is still
-// mockup data with no real actions behind it.
-export default function StripeAdminPage() {
+// Not automatic — every action here calls the real Payliance API and moves real money
+// (or, in staging, simulated money). Gated by a shared staff password (lib/staff-auth.ts).
+// Unlike the old Stripe panel, there's no "create account" step first — Payliance's
+// Debit/Credit calls carry the borrower's bank routing/account number directly, and
+// that's already captured (encrypted) the moment they complete Plaid in /apply.
+export default function PaylianceAdminPage() {
   const [authChecked, setAuthChecked] = useState(false)
   const [authenticated, setAuthenticated] = useState(false)
   const [password, setPassword] = useState("")
@@ -37,6 +36,7 @@ export default function StripeAdminPage() {
   const [busyId, setBusyId] = useState<string | null>(null)
   const [amounts, setAmounts] = useState<Record<string, string>>({})
   const [loanIds, setLoanIds] = useState<Record<string, string>>({})
+  const [lastTranId, setLastTranId] = useState<Record<string, string>>({})
   const [message, setMessage] = useState<Record<string, { type: "ok" | "error"; text: string }>>({})
 
   const loadApplications = async () => {
@@ -94,8 +94,32 @@ export default function StripeAdminPage() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error ?? "Ocurrió un error.")
+      if (data.uniqueTranId) setLastTranId((prev) => ({ ...prev, [applicationId]: data.uniqueTranId }))
       setMessage((prev) => ({ ...prev, [applicationId]: { type: "ok", text: JSON.stringify(data) } }))
       await loadApplications()
+    } catch (err) {
+      setMessage((prev) => ({
+        ...prev,
+        [applicationId]: { type: "error", text: err instanceof Error ? err.message : "Ocurrió un error." },
+      }))
+    } finally {
+      setBusyId(null)
+    }
+  }
+
+  const checkStatus = async (applicationId: string) => {
+    const uniqueTranId = lastTranId[applicationId]
+    if (!uniqueTranId) return
+    setBusyId(applicationId + "/api/payliance/status")
+    try {
+      const res = await fetch("/api/payliance/status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ uniqueTranId }),
+      })
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error ?? "Ocurrió un error.")
+      setMessage((prev) => ({ ...prev, [applicationId]: { type: "ok", text: JSON.stringify(data) } }))
     } catch (err) {
       setMessage((prev) => ({
         ...prev,
@@ -141,12 +165,12 @@ export default function StripeAdminPage() {
     <div className="max-w-5xl mx-auto">
       <div className="mb-8">
         <h1 className="font-serif text-2xl font-bold text-foreground">Desembolsos y Cobros</h1>
-        <p className="text-[var(--brand-orange)] italic text-sm">Stripe — ACH</p>
+        <p className="text-[var(--brand-orange)] italic text-sm">Payliance — ACH</p>
         <p className="text-muted-foreground text-sm mt-1">
-          Prepara la cuenta de Stripe del prestatario, luego desembolsa o cobra pagos. Cada transferencia queda
-          &quot;pendiente&quot; hasta que Stripe confirme (2-4 días hábiles). La cuenta bancaria del prestatario se
-          vincula en el propio formulario de solicitud (/apply) vía Stripe Financial Connections — este panel no
-          puede vincularla por él.
+          Desembolsa o cobra pagos directo a la cuenta bancaria que el cliente ya vinculó con Plaid en /apply. Cada
+          transacción queda &quot;pendiente&quot; hasta confirmar el estado (2-4 días hábiles) — usa &quot;Verificar
+          estado&quot; después de la última transacción para consultarlo, ya que Payliance no envía notificaciones
+          automáticas.
         </p>
       </div>
 
@@ -155,8 +179,6 @@ export default function StripeAdminPage() {
       <div className="space-y-4">
         {applications.map((app) => {
           const name = `${app.first_name ?? ""} ${app.last_name ?? ""}`.trim() || "(sin nombre)"
-          const hasStripeAccounts = Boolean(app.stripe_customer_id && app.stripe_connect_account_id)
-          const ready = Boolean(app.stripe_repayment_payment_method_id)
           const amount = amounts[app.application_id] ?? ""
           const loanId = loanIds[app.application_id] ?? ""
           const msg = message[app.application_id]
@@ -173,22 +195,10 @@ export default function StripeAdminPage() {
                 <span className="text-xs px-2 py-1 rounded-full bg-muted text-muted-foreground">{app.status}</span>
               </div>
 
-              {!hasStripeAccounts ? (
-                <Button
-                  size="sm"
-                  disabled={busyId === app.application_id + "/api/stripe/setup-borrower"}
-                  onClick={() => callAction(app.application_id, "/api/stripe/setup-borrower", {})}
-                >
-                  {busyId === app.application_id + "/api/stripe/setup-borrower" ? (
-                    <Loader2 className="w-4 h-4 animate-spin" />
-                  ) : (
-                    "Crear cuenta en Stripe"
-                  )}
-                </Button>
-              ) : !ready ? (
+              {!app.bank_linked ? (
                 <p className="text-xs text-amber-700 bg-amber-50 rounded-lg p-2">
-                  Cuenta de Stripe creada. Falta que el prestatario vincule su cuenta bancaria desde /apply antes de
-                  poder desembolsar o cobrar.
+                  El cliente todavía no vincula su cuenta bancaria con Plaid desde /apply — no se puede desembolsar
+                  ni cobrar todavía.
                 </p>
               ) : (
                 <div className="flex flex-wrap items-end gap-3">
@@ -212,19 +222,36 @@ export default function StripeAdminPage() {
                   <Button
                     size="sm"
                     variant="outline"
-                    disabled={!amount || busyId === app.application_id + "/api/stripe/disburse"}
-                    onClick={() => callAction(app.application_id, "/api/stripe/disburse", { amount: Number(amount), loandiskLoanId: loanId || null })}
+                    disabled={!amount || busyId === app.application_id + "/api/payliance/disburse"}
+                    onClick={() => callAction(app.application_id, "/api/payliance/disburse", { amount: Number(amount), loandiskLoanId: loanId || null })}
                   >
-                    {busyId === app.application_id + "/api/stripe/disburse" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Desembolsar"}
+                    {busyId === app.application_id + "/api/payliance/disburse" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Desembolsar"}
                   </Button>
                   <Button
                     size="sm"
                     variant="outline"
-                    disabled={!amount || busyId === app.application_id + "/api/stripe/collect-repayment"}
-                    onClick={() => callAction(app.application_id, "/api/stripe/collect-repayment", { amount: Number(amount), loandiskLoanId: loanId || null })}
+                    disabled={!amount || busyId === app.application_id + "/api/payliance/collect-repayment"}
+                    onClick={() => callAction(app.application_id, "/api/payliance/collect-repayment", { amount: Number(amount), loandiskLoanId: loanId || null })}
                   >
-                    {busyId === app.application_id + "/api/stripe/collect-repayment" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Cobrar Pago"}
+                    {busyId === app.application_id + "/api/payliance/collect-repayment" ? <Loader2 className="w-4 h-4 animate-spin" /> : "Cobrar Pago"}
                   </Button>
+                  {lastTranId[app.application_id] && (
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      disabled={busyId === app.application_id + "/api/payliance/status"}
+                      onClick={() => checkStatus(app.application_id)}
+                    >
+                      {busyId === app.application_id + "/api/payliance/status" ? (
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                      ) : (
+                        <>
+                          <RefreshCw className="w-4 h-4 mr-1.5" />
+                          Verificar estado
+                        </>
+                      )}
+                    </Button>
+                  )}
                 </div>
               )}
 

@@ -47,9 +47,6 @@ create table if not exists loan_applications (
   plaid_income_status text,
   loandisk_borrower_id text,
   loandisk_loan_id text, -- filled in manually once staff books the actual loan in LoanDisk
-  stripe_customer_id text, -- platform-level Customer, used to charge repayments (lib/stripe.ts)
-  stripe_connect_account_id text, -- borrower's Connect Custom account, used as the disbursement destination
-  stripe_repayment_payment_method_id text, -- us_bank_account PaymentMethod on stripe_customer_id, linked via Financial Connections
   submitted_at timestamptz,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
@@ -79,45 +76,35 @@ create table if not exists plaid_webhook_events (
   received_at timestamptz not null default now()
 );
 
--- One row per Stripe money movement — both loan disbursements (TOV → borrower, a
--- Transfer + Payout pair) and repayment collections (borrower → TOV, a PaymentIntent).
--- ACH settles in 2-4 business days and can still be returned after appearing to
--- succeed, so `status` tracks the Stripe object's lifecycle (pending → processed →
--- failed/cancelled) via webhooks rather than being marked final at creation time. Only
--- once `status = 'processed'` should the corresponding disbursement/repayment be
--- considered final in LoanDisk. `stripe_object_id` holds the payout id (disbursement)
--- or payment_intent id (repayment) — whichever one app/api/webhooks/stripe listens for.
-create table if not exists stripe_transfers (
+-- One row per Payliance ACH money movement — both loan disbursements (TOV → borrower,
+-- a Credit call) and repayment collections (borrower → TOV, a Debit call). ACH settles
+-- in 2-4 business days and can still be returned after appearing to succeed, so
+-- `status` tracks the transaction's lifecycle (pending → processed → failed/cancelled).
+-- Payliance has no webhook mechanism, so unlike Stripe this is only ever updated by a
+-- staff-triggered poll (POST /api/payliance/status, which calls Payliance's Retrieve
+-- function) — never automatically. Only once `status = 'processed'` should the
+-- corresponding disbursement/repayment be considered final in LoanDisk.
+create table if not exists payliance_transfers (
   id uuid primary key default gen_random_uuid(),
   application_id text references loan_applications (application_id) on delete set null,
   loandisk_loan_id text, -- set for repayments once the loan exists in LoanDisk
   direction text not null, -- 'disbursement' | 'repayment'
   amount numeric not null,
-  stripe_object_id text unique,
+  unique_tran_id text unique not null, -- merchant-assigned UniqueTranId sent to Payliance, used to Retrieve status
+  authorization_id text, -- Payliance's AuthorizationId, returned once the Debit/Credit call validates
   status text not null default 'pending', -- pending | processed | failed | cancelled
   loandisk_repayment_id text, -- set once a 'repayment' transfer is posted back to LoanDisk via POST /repayment
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
 
-create index if not exists idx_stripe_transfers_application_id on stripe_transfers (application_id);
-
--- Raw log of every Stripe webhook received (payout.paid, payout.failed,
--- payment_intent.succeeded, payment_intent.payment_failed, etc.)
-create table if not exists stripe_webhook_events (
-  id uuid primary key default gen_random_uuid(),
-  type text,
-  object_id text,
-  payload jsonb not null,
-  received_at timestamptz not null default now()
-);
+create index if not exists idx_payliance_transfers_application_id on payliance_transfers (application_id);
 
 -- Row Level Security: these tables are only ever accessed from the Node.js backend
 -- using the Supabase SERVICE ROLE key, never the anon key. Lock them down by default.
 alter table loan_applications enable row level security;
 alter table plaid_items enable row level security;
 alter table plaid_webhook_events enable row level security;
-alter table stripe_transfers enable row level security;
-alter table stripe_webhook_events enable row level security;
+alter table payliance_transfers enable row level security;
 -- No policies are created — with RLS enabled and no policies, only the service role
 -- (which bypasses RLS) can read/write. The anon key gets zero access.

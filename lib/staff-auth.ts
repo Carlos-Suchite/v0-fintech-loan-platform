@@ -1,6 +1,6 @@
 import { createHmac, timingSafeEqual } from "crypto"
 
-// Lightweight shared-password gate for the staff panel (app/admin/stripe) and the
+// Lightweight shared-password gate for the staff panel (app/admin/payliance) and the
 // money-moving API routes it calls. NOT a full accounts/RBAC system — there's no user
 // table, just one shared password Maury sets and distributes to staff. Good enough for
 // a small team pre-launch; revisit if TOV needs per-staff audit trails later.

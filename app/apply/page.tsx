@@ -7,7 +7,6 @@ import Image from "next/image"
 import { CheckCircle2, ShieldCheck, Lock, Clock, Loader2, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import PlaidLinkButton from "@/components/PlaidLinkButton"
-import StripeBankConnect from "@/components/StripeBankConnect"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -202,7 +201,6 @@ function ApplyForm() {
   const [step, setStep] = useState(1)
   const [submitted, setSubmitted] = useState(false)
   const [bankLinked, setBankLinked] = useState(false)
-  const [stripeLinked, setStripeLinked] = useState(false)
   const [formData, setFormData] = useState(EMPTY_FORM)
   const [applicationId, setApplicationId] = useState<string | null>(null)
   const [savingStep, setSavingStep] = useState(false)
@@ -241,7 +239,6 @@ function ApplyForm() {
     const savedStep = sessionStorage.getItem("tov_step")
     if (savedStep) setStep(Number(savedStep))
     if (sessionStorage.getItem("tov_bank_linked") === "true") setBankLinked(true)
-    if (sessionStorage.getItem("tov_stripe_linked") === "true") setStripeLinked(true)
   }, [])
 
   useEffect(() => {
@@ -335,7 +332,6 @@ function ApplyForm() {
       sessionStorage.removeItem("tov_application_id")
       sessionStorage.removeItem("tov_step")
       sessionStorage.removeItem("tov_bank_linked")
-      sessionStorage.removeItem("tov_stripe_linked")
       setSubmitted(true)
     } catch (err) {
       console.error("Error submitting application:", err)
@@ -617,23 +613,11 @@ function ApplyForm() {
                 <h2 className="font-serif text-xl font-bold text-foreground mb-2">{t.step4Title}</h2>
                 <p className="text-sm text-muted-foreground mb-6">{t.step4Sub}</p>
                 {bankLinked ? (
-                  <div className="flex flex-col gap-4">
-                    <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl p-5">
-                      <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                        <CheckCircle2 className="w-5 h-5 text-green-600" />
-                      </div>
-                      <p className="text-sm font-medium text-green-800">{t.bankConnected}</p>
+                  <div className="flex items-center gap-3 bg-green-50 border border-green-200 rounded-xl p-5">
+                    <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <CheckCircle2 className="w-5 h-5 text-green-600" />
                     </div>
-                    <StripeBankConnect
-                      applicationId={applicationId ?? ""}
-                      firstName={formData.firstName}
-                      lastName={formData.lastName}
-                      email={formData.email}
-                      onComplete={() => {
-                        setStripeLinked(true)
-                        sessionStorage.setItem("tov_stripe_linked", "true")
-                      }}
-                    />
+                    <p className="text-sm font-medium text-green-800">{t.bankConnected}</p>
                   </div>
                 ) : verifying ? (
                   <div className="flex items-center gap-3 bg-muted border border-border rounded-xl p-5">
@@ -693,22 +677,10 @@ function ApplyForm() {
                             <p key={j} className="text-sm text-foreground py-0.5">{item}</p>
                           ))
                         ) : (
-                          <>
-                            <p className={cn("text-sm py-0.5 flex items-center gap-1.5", bankLinked ? "text-green-700" : "text-muted-foreground")}>
-                              {bankLinked ? <CheckCircle2 className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
-                              {bankLinked ? t.bankConnected : t.bankPending}
-                            </p>
-                            <p className={cn("text-sm py-0.5 flex items-center gap-1.5", stripeLinked ? "text-green-700" : "text-muted-foreground")}>
-                              {stripeLinked ? <CheckCircle2 className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
-                              {stripeLinked
-                                ? lang === "es"
-                                  ? "Cuenta de pagos y desembolsos conectada"
-                                  : "Payment & disbursement account connected"
-                                : lang === "es"
-                                  ? "Cuenta de pagos y desembolsos pendiente"
-                                  : "Payment & disbursement account pending"}
-                            </p>
-                          </>
+                          <p className={cn("text-sm py-0.5 flex items-center gap-1.5", bankLinked ? "text-green-700" : "text-muted-foreground")}>
+                            {bankLinked ? <CheckCircle2 className="w-4 h-4" /> : <Clock className="w-4 h-4" />}
+                            {bankLinked ? t.bankConnected : t.bankPending}
+                          </p>
                         )}
                       </div>
                     ))

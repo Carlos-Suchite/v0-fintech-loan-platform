@@ -4,7 +4,9 @@ import { isStaffAuthenticated } from "@/lib/staff-auth"
 
 // Lists applications for the staff panel picker. Deliberately excludes every sensitive
 // column (ssn_encrypted, bank_account_number_encrypted, plaid tokens, etc.) — only
-// what staff need to identify the right applicant and see their Stripe readiness.
+// what staff need to identify the right applicant and see their Payliance readiness.
+// `bank_linked` is a boolean derived from bank_account_number_encrypted so this route
+// never has to return the encrypted value itself.
 export async function GET(req: Request) {
   if (!isStaffAuthenticated(req)) {
     return NextResponse.json({ error: "No autorizado." }, { status: 401 })
@@ -18,7 +20,7 @@ export async function GET(req: Request) {
   const { data, error } = await supabase
     .from("loan_applications")
     .select(
-      "application_id, first_name, last_name, division, product_name, loan_amount, status, loandisk_borrower_id, stripe_customer_id, stripe_connect_account_id, stripe_repayment_payment_method_id, created_at",
+      "application_id, first_name, last_name, division, product_name, loan_amount, status, loandisk_borrower_id, bank_account_number_encrypted, created_at",
     )
     .order("created_at", { ascending: false })
     .limit(100)
@@ -28,5 +30,10 @@ export async function GET(req: Request) {
     return NextResponse.json({ error: "No se pudieron cargar las solicitudes." }, { status: 500 })
   }
 
-  return NextResponse.json({ ok: true, applications: data })
+  const applications = data.map(({ bank_account_number_encrypted, ...rest }) => ({
+    ...rest,
+    bank_linked: Boolean(bank_account_number_encrypted),
+  }))
+
+  return NextResponse.json({ ok: true, applications })
 }
