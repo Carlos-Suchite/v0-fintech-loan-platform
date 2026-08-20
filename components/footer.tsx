@@ -40,8 +40,25 @@ const footerLinks = {
 }
 
 const copy = {
-  es: { tagline: "Préstamos personales rápidos y transparentes para alcanzar tus metas financieras.", rights: "Todos los derechos reservados.", lender: "Prestamista con licencia." },
-  en: { tagline: "Fast, transparent personal loans to help you reach your financial goals.", rights: "All rights reserved.", lender: "Licensed lender. Equal opportunity lender." },
+  es: {
+    tagline: "Préstamos personales rápidos y transparentes para alcanzar tus metas financieras.",
+    rights: "Todos los derechos reservados.",
+    lender: "Prestamista con licencia.",
+    contactTitle: "Contacto",
+  },
+  en: {
+    tagline: "Fast, transparent personal loans to help you reach your financial goals.",
+    rights: "All rights reserved.",
+    lender: "Licensed lender. Equal opportunity lender.",
+    contactTitle: "Contact",
+  },
+}
+
+const CONTACT = {
+  phone: "(786) 295-8015",
+  phoneHref: "tel:+17862958015",
+  email: "info@touchofvintage.biz",
+  address: "2620 NW 33rd Street, Miami, FL 33142",
 }
 
 export function Footer() {
@@ -52,7 +69,7 @@ export function Footer() {
   return (
     <footer className="bg-[var(--brand-black)] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
           {/* Brand */}
           <div>
             <Link href="/" className="inline-flex mb-4">
@@ -65,6 +82,20 @@ export function Footer() {
               />
             </Link>
             <p className="text-sm text-white/60 leading-relaxed max-w-xs">{t.tagline}</p>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 className="text-xs font-semibold uppercase tracking-widest text-white/40 mb-4">{t.contactTitle}</h4>
+            <ul className="flex flex-col gap-2 text-sm text-white/70">
+              <li>
+                <a href={CONTACT.phoneHref} className="hover:text-[var(--brand-orange)] transition-colors">{CONTACT.phone}</a>
+              </li>
+              <li>
+                <a href={`mailto:${CONTACT.email}`} className="hover:text-[var(--brand-orange)] transition-colors">{CONTACT.email}</a>
+              </li>
+              <li className="text-white/60">{CONTACT.address}</li>
+            </ul>
           </div>
 
           {/* Links */}
