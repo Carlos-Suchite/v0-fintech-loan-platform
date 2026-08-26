@@ -51,7 +51,7 @@ export function AdminSidebar({ mobile, onClose }: AdminSidebarProps) {
       </div>
 
       <div className="px-4 py-2 border-b border-white/10">
-        <span className="text-xs text-[var(--brand-orange)] bg-[var(--brand-orange)]/15 px-2 py-0.5 rounded-full">Panel Admin / Admin Panel</span>
+        <span className="text-xs text-[var(--brand-orange)] bg-[var(--brand-orange)]/15 px-2 py-0.5 rounded-full">Admin Panel</span>
       </div>
 
       <nav className="flex-1 p-4 overflow-y-auto">
@@ -83,7 +83,7 @@ export function AdminSidebar({ mobile, onClose }: AdminSidebarProps) {
           </div>
           <div>
             <p className="text-sm text-white font-medium">Admin User</p>
-            <p className="text-xs text-white/40">Administrador</p>
+            <p className="text-xs text-white/40">Administrator</p>
           </div>
         </div>
         <Link
@@ -91,7 +91,7 @@ export function AdminSidebar({ mobile, onClose }: AdminSidebarProps) {
           className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/5 transition-colors"
         >
           <LogOut className="w-4 h-4" />
-          Cerrar Sesión / Sign Out
+          Sign Out
         </Link>
       </div>
     </aside>

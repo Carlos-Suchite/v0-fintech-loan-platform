@@ -18,15 +18,14 @@ export default function SignUpPage() {
 
         <div className="space-y-6">
           <h2 className="text-white text-3xl font-serif font-bold leading-tight">
-            Comienza tu camino hacia la libertad financiera.
+            Start your journey to financial freedom.
           </h2>
-          <p className="text-white/50 text-sm italic">Start your journey to financial freedom.</p>
           <ul className="space-y-3">
             {[
-              "Solicita en menos de 5 minutos / Apply in under 5 minutes",
-              "Sin cargos ocultos nunca / No hidden fees ever",
-              "Decisiones en horas, no días / Decisions in hours, not days",
-              "Fondos depositados el mismo día / Funds deposited the same day",
+              "Apply in under 5 minutes",
+              "No hidden fees ever",
+              "Decisions in hours, not days",
+              "Funds deposited the same day",
             ].map((item) => (
               <li key={item} className="flex items-center gap-3 text-white/70 text-sm">
                 <ShieldCheck className="w-4 h-4 text-[var(--brand-orange)] flex-shrink-0" />
@@ -37,7 +36,7 @@ export default function SignUpPage() {
         </div>
 
         <p className="text-white/30 text-xs">
-          Prestamista con licencia. Tu información está protegida con cifrado de 256 bits. / Licensed lender. Your information is protected by 256-bit encryption.
+          Licensed lender. Your information is protected by 256-bit encryption.
         </p>
       </div>
 
@@ -52,52 +51,51 @@ export default function SignUpPage() {
           </Link>
 
           <h1 className="font-serif text-2xl font-bold text-[var(--brand-black)] mb-1">
-            Crea tu cuenta
+            Create your account
           </h1>
-          <p className="text-[var(--brand-orange)] italic text-sm mb-1">Create your account</p>
           <p className="text-muted-foreground text-sm mb-8">
-            Únete a miles de clientes que confían en Touch of Vintage. / Join thousands of borrowers who trust Touch of Vintage.
+            Join thousands of borrowers who trust Touch of Vintage.
           </p>
 
           <form className="flex flex-col gap-5">
             <div className="grid grid-cols-2 gap-3">
               <div className="flex flex-col gap-1.5">
-                <Label htmlFor="first">Nombre / First Name</Label>
+                <Label htmlFor="first">First Name</Label>
                 <Input id="first" placeholder="María" />
               </div>
               <div className="flex flex-col gap-1.5">
-                <Label htmlFor="last">Apellido / Last Name</Label>
+                <Label htmlFor="last">Last Name</Label>
                 <Input id="last" placeholder="García" />
               </div>
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="email">Correo / Email Address</Label>
-              <Input id="email" type="email" placeholder="tu@correo.com" />
+              <Label htmlFor="email">Email Address</Label>
+              <Input id="email" type="email" placeholder="you@email.com" />
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="phone">Teléfono / Phone Number</Label>
+              <Label htmlFor="phone">Phone Number</Label>
               <Input id="phone" type="tel" placeholder="+1 (555) 000-0000" />
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label htmlFor="password">Contraseña / Password</Label>
-              <Input id="password" type="password" placeholder="Mín. 8 caracteres / Min. 8 characters" />
+              <Label htmlFor="password">Password</Label>
+              <Input id="password" type="password" placeholder="Min. 8 characters" />
             </div>
 
             <Button className="w-full bg-[var(--brand-orange)] text-white hover:bg-[var(--brand-orange-dark)]">
-              Crear Cuenta / Create Account
+              Create Account
             </Button>
           </form>
 
           <p className="text-xs text-muted-foreground text-center mt-5 leading-relaxed">
-            Al crear una cuenta, aceptas nuestros{" "}
-            <Link href="/terms" className="text-[var(--brand-orange)] hover:underline">Términos / Terms</Link> y nuestra{" "}
-            <Link href="/privacy" className="text-[var(--brand-orange)] hover:underline">Política de Privacidad / Privacy Policy</Link>.
+            By creating an account, you agree to our{" "}
+            <Link href="/terms" className="text-[var(--brand-orange)] hover:underline">Terms</Link> and our{" "}
+            <Link href="/privacy" className="text-[var(--brand-orange)] hover:underline">Privacy Policy</Link>.
           </p>
 
           <p className="text-center text-sm text-muted-foreground mt-4">
-            ¿Ya tienes cuenta? / Already have an account?{" "}
+            Already have an account?{" "}
             <Link href="/login" className="text-[var(--brand-orange)] hover:underline font-medium">
-              Ingresar / Sign in
+              Sign in
             </Link>
           </p>
         </div>
