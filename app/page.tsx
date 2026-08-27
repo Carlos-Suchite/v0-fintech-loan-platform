@@ -34,6 +34,13 @@ const copy = {
   },
 }
 
+const CONTACT = {
+  phone: "(786) 295-8015",
+  phoneHref: "tel:+17862958015",
+  email: "info@touchofvintage.biz",
+  emailHref: "mailto:info@touchofvintage.biz",
+}
+
 export default function HomePage() {
   const { lang } = useLang()
   const t = copy[lang]
@@ -210,6 +217,22 @@ export default function HomePage() {
             >
               {t.copy}
             </span>
+            <div className="flex items-center gap-4">
+              <a
+                href={CONTACT.phoneHref}
+                className="text-[11px] tracking-[0.05em] transition-colors hover:text-white"
+                style={{ color: "rgba(255,255,255,0.65)" }}
+              >
+                {CONTACT.phone}
+              </a>
+              <a
+                href={CONTACT.emailHref}
+                className="text-[11px] tracking-[0.05em] transition-colors hover:text-white"
+                style={{ color: "rgba(255,255,255,0.65)" }}
+              >
+                {CONTACT.email}
+              </a>
+            </div>
             <nav className="flex gap-5">
               {[
                 { label: t.privacy, href: "/privacy" },

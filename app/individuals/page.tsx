@@ -2,6 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
+import { Footer } from "@/components/footer"
 
 const products = [
   {
@@ -339,30 +340,8 @@ export default function IndividualsPage() {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer style={{
-          background: "#0b1524", padding: "22px 48px",
-          display: "flex", justifyContent: "space-between", alignItems: "center",
-          borderTop: "1px solid rgba(255,255,255,0.08)",
-          flexWrap: "wrap", gap: 8,
-        }}>
-          <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", letterSpacing: "0.05em" }}>
-            &copy; 2026 Touch of Vintage LLC. All rights reserved.
-          </span>
-          <nav style={{ display: "flex", gap: 20 }}>
-            {[{ label: "Privacy Policy", href: "/privacy" }, { label: "Terms of Use", href: "/terms" }, { label: "Contact", href: "/contact" }].map((l) => (
-              <Link key={l.href} href={l.href} style={{
-                fontSize: 11, color: "rgba(255,255,255,0.4)", textDecoration: "none",
-                letterSpacing: "0.06em", transition: "color 0.15s",
-              }}
-                onMouseEnter={e => (e.currentTarget as HTMLAnchorElement).style.color = "#fff"}
-                onMouseLeave={e => (e.currentTarget as HTMLAnchorElement).style.color = "rgba(255,255,255,0.4)"}
-              >{l.label}</Link>
-            ))}
-          </nav>
-        </footer>
-
       </div>
+      <Footer />
     </>
   )
 }
