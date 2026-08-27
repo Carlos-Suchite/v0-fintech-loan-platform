@@ -210,7 +210,7 @@ export default function IndividualsPage() {
                       </li>
                     ))}
                   </ul>
-                  <Link href="/apply" style={{
+                  <Link href="/apply?division=consumer" style={{
                     display: "inline-flex", alignItems: "center", gap: 8,
                     fontSize: 11, fontWeight: 600, letterSpacing: "0.14em",
                     textTransform: "uppercase", color: "#fff",

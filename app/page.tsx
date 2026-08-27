@@ -163,7 +163,7 @@ export default function HomePage() {
 
               {/* Commercial — navy */}
               <Link
-                href="/contact"
+                href="/commercial"
                 className="group relative flex-1 flex items-center justify-between px-6 py-[18px] rounded-md overflow-hidden transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0"
                 style={{
                   background: "linear-gradient(135deg, #2C3E55 0%, #1A2D45 100%)",
