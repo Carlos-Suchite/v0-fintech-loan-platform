@@ -65,6 +65,17 @@ function generateCheckNumber(): string {
   return String(Date.now()).slice(-10)
 }
 
+// SEC code depends on transaction direction and division, per the ACH transaction
+// types actually checked on Touch of Vintage's real Payliance merchant application:
+// WEB (online consumer debits), Credit Transaction Capability / PPD (consumer
+// disbursements), and B2B Transactions / CCD (commercial division, both directions —
+// CCD applies "regardless of how authorization is obtained," so it covers commercial
+// debits too, not just credits).
+function getSecCode(kind: "debit" | "credit", isBusiness: boolean): string {
+  if (isBusiness) return "CCD"
+  return kind === "credit" ? "PPD" : "WEB"
+}
+
 export interface EcheckResponse {
   AuthorizationId: string
   ValidationCode: number
@@ -85,7 +96,7 @@ async function submitEcheck(
     AccountNumber: accountNumber,
     CheckNumber: generateCheckNumber(),
     CheckAmount: amount.toFixed(2),
-    SecCode: "WEB",
+    SecCode: getSecCode(kind, bank.isBusiness),
     AccountType: mapAccountType(bank.accountType, bank.isBusiness),
     FirstName: bank.firstName,
     LastName: bank.lastName,
@@ -95,13 +106,21 @@ async function submitEcheck(
   return paylianceRequest<EcheckResponse>(`api/v1/echeck/${kind}`, body)
 }
 
+// Payliance caps UniqueTranId at 50 characters. `disb-<uuid>-<timestamp>` (with
+// the applicationId's dashes) runs to 55 and gets rejected ("UniqueTranID too
+// long") — strip the UUID's dashes and use a single-letter direction prefix to
+// stay well under the limit (1 + 32 + 13 = 46 chars).
+function buildUniqueTranId(direction: "D" | "R", applicationId: string): string {
+  return `${direction}${applicationId.replace(/-/g, "")}${Date.now()}`
+}
+
 // Credit = pay the customer = loan disbursement.
 export async function disburseToBorrower(params: {
   applicationId: string
   amount: number
   bank: BorrowerBankInput
 }): Promise<{ uniqueTranId: string; response: EcheckResponse }> {
-  const uniqueTranId = `disb-${params.applicationId}-${Date.now()}`
+  const uniqueTranId = buildUniqueTranId("D", params.applicationId)
   const response = await submitEcheck("credit", { uniqueTranId, amount: params.amount, bank: params.bank })
   return { uniqueTranId, response }
 }
@@ -112,7 +131,7 @@ export async function collectRepayment(params: {
   amount: number
   bank: BorrowerBankInput
 }): Promise<{ uniqueTranId: string; response: EcheckResponse }> {
-  const uniqueTranId = `repay-${params.applicationId}-${Date.now()}`
+  const uniqueTranId = buildUniqueTranId("R", params.applicationId)
   const response = await submitEcheck("debit", { uniqueTranId, amount: params.amount, bank: params.bank })
   return { uniqueTranId, response }
 }
