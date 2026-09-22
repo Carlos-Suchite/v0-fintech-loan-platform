@@ -89,6 +89,7 @@ async function submitEcheck(
 ): Promise<EcheckResponse> {
   const { uniqueTranId, amount, bank } = params
   const accountNumber = decrypt(bank.accountNumberEncrypted)
+  const secCode = getSecCode(kind, bank.isBusiness)
 
   const body: Record<string, unknown> = {
     UniqueTranId: uniqueTranId,
@@ -96,11 +97,16 @@ async function submitEcheck(
     AccountNumber: accountNumber,
     CheckNumber: generateCheckNumber(),
     CheckAmount: amount.toFixed(2),
-    SecCode: getSecCode(kind, bank.isBusiness),
+    SecCode: secCode,
     AccountType: mapAccountType(bank.accountType, bank.isBusiness),
     FirstName: bank.firstName,
     LastName: bank.lastName,
     ...(bank.isBusiness && bank.companyName ? { CompanyName: bank.companyName } : {}),
+    // Required by Payliance for SEC code WEB (internet-initiated debits) — S = single
+    // entry, matching how repayments are submitted here (one manually-triggered charge
+    // per payment, not a stored recurring series). Confirmed via Payliance certification
+    // 2026-09-21 (Josh Trevino, test case ADW03).
+    ...(secCode === "WEB" ? { WebType: "S" } : {}),
   }
 
   return paylianceRequest<EcheckResponse>(`api/v1/echeck/${kind}`, body)
