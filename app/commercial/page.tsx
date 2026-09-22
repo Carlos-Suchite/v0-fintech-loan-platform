@@ -149,8 +149,12 @@ export default function CommercialPage() {
               onMouseLeave={(e) => { (e.currentTarget as HTMLDivElement).style.transform = "none"; (e.currentTarget as HTMLDivElement).style.boxShadow = "none"; }}
             >
               {/* image banner */}
-              <div style={{ background: "#f9f7f5", borderBottom: "1px solid #ede9e4", padding: "24px 24px 18px" }}>
-                <Image src={p.img} alt={p.alt} width={300} height={160} style={{ width: "100%", maxWidth: 300, height: "auto", display: "block" }} />
+              <div style={{
+                background: "#f9f7f5", borderBottom: "1px solid #ede9e4",
+                padding: "24px 24px 18px", height: 116,
+                display: "flex", alignItems: "center", justifyContent: "flex-start",
+              }}>
+                <Image src={p.img} alt={p.alt} width={300} height={160} style={{ width: "auto", maxWidth: "100%", height: 74, display: "block" }} />
               </div>
 
               <div style={{ padding: "22px 24px 26px" }}>
