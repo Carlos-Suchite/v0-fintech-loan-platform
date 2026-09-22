@@ -187,9 +187,10 @@ export default function IndividualsPage() {
                 {/* Card image banner */}
                 <div style={{
                   background: "#f9f7f5", borderBottom: "1px solid #ede9e4",
-                  padding: "24px 24px 18px", display: "flex", alignItems: "center",
+                  padding: "24px 24px 18px", height: 116,
+                  display: "flex", alignItems: "center", justifyContent: "flex-start",
                 }}>
-                  <Image src={p.img} alt={p.alt} width={280} height={140} style={{ width: "100%", maxWidth: 280, height: "auto", display: "block" }} />
+                  <Image src={p.img} alt={p.alt} width={280} height={140} style={{ width: "auto", maxWidth: "100%", height: 74, display: "block" }} />
                 </div>
 
                 {/* Card body */}
